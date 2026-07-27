@@ -14,6 +14,12 @@ const MARKET_RESEARCH_PANEL := preload("res://scenes/ui/market_research_panel.ts
 var current_overlay: Control = null
 
 func _ready() -> void:
+	# NetworkOverview itself was never anchored to fill the window (still at
+	# its default 40x40 declared size) - everything looked fine until now
+	# because Godot doesn't clip overflowing children, but any FULL_RECT
+	# anchor set on a child is relative to THIS node's real size. Fix it here.
+	set_anchors_preset(Control.PRESET_FULL_RECT)
+
 	# Only load starting stations the first time - if the player already owns
 	# stations (returning from StationView), don't re-add duplicates.
 	if GameState.owned_stations.is_empty():
@@ -27,6 +33,12 @@ func _ready() -> void:
 	%NetworkAnalyticsButton.pressed.connect(_on_network_analytics_pressed)
 	%HQButton.pressed.connect(_on_hq_pressed)
 	%MenuButton.pressed.connect(_on_menu_pressed)
+
+	# Force this to fill the screen from code, rather than depending on an
+	# editor anchor setting being correct. Ignore mouse input when empty so
+	# it doesn't block clicks to the station buttons underneath it.
+	%OverlayContainer.set_anchors_preset(Control.PRESET_FULL_RECT)
+	%OverlayContainer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 	_refresh_display()
 
@@ -56,19 +68,31 @@ func _on_menu_pressed() -> void:
 func _open_overlay(panel: Control) -> void:
 	_close_overlay()
 
-	panel.set_anchors_preset(Control.PRESET_CENTER)
+	# Dim backdrop covers the whole screen, blocks clicks to what's behind it,
+	# and visually separates the overlay from the Network View underneath -
+	# this is what was missing before (Control has no background by default).
+	var backdrop := ColorRect.new()
+	backdrop.color = Color(0.0, 0.0, 0.0, 0.6)
+	backdrop.set_anchors_preset(Control.PRESET_FULL_RECT)
+	backdrop.mouse_filter = Control.MOUSE_FILTER_STOP
 
+	# PanelContainer has a solid background by default (unlike a bare Control
+	# or VBoxContainer), so the actual content reads clearly against the dim.
+	var content_panel := PanelContainer.new()
+	content_panel.set_anchors_preset(Control.PRESET_CENTER)
+
+	var content_box := VBoxContainer.new()
 	var close_button := Button.new()
 	close_button.text = "X Close"
 	close_button.pressed.connect(_close_overlay)
+	content_box.add_child(close_button)
+	content_box.add_child(panel)
 
-	var overlay_root := VBoxContainer.new()
-	overlay_root.set_anchors_preset(Control.PRESET_FULL_RECT)
-	overlay_root.add_child(close_button)
-	overlay_root.add_child(panel)
+	content_panel.add_child(content_box)
+	backdrop.add_child(content_panel)
 
-	%OverlayContainer.add_child(overlay_root)
-	current_overlay = overlay_root
+	%OverlayContainer.add_child(backdrop)
+	current_overlay = backdrop
 
 func _close_overlay() -> void:
 	if current_overlay != null:
