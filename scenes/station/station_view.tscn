@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cx844sr5seoes"]
 
-[ext_resource type="Script" uid="uid://b7jy5squknicf" path="res://scenes/station/control.gd" id="1_i2y0b"]
+[ext_resource type="Script" uid="uid://b7jy5squknicf" path="res://scenes/station/station_view.gd" id="1_i2y0b"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_nyl0h"]
 
@@ -55,6 +55,7 @@ layout_mode = 2
 text = "Run Promotion ($500)"
 
 [node name="BackButton" type="Button" parent="Control/VBoxContainer" unique_id=1995049911]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Back"
 
@@ -62,17 +63,21 @@ text = "Back"
 layout_mode = 2
 
 [node name="HireTalentButton" type="Button" parent="Control/VBoxContainer/HBoxContainer" unique_id=818226492]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Hire Talent"
 
 [node name="ProduceShowButton" type="Button" parent="Control/VBoxContainer/HBoxContainer" unique_id=1043050261]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Produce Show"
 
 [node name="SponsorsButton" type="Button" parent="Control/VBoxContainer/HBoxContainer" unique_id=237958385]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Sponsors"
 
 [node name="StationAnalyticsButton" type="Button" parent="Control/VBoxContainer/HBoxContainer" unique_id=1879139278]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Station Analytics"
