@@ -18,7 +18,12 @@ func _ready() -> void:
 	# its default 40x40 declared size) - everything looked fine until now
 	# because Godot doesn't clip overflowing children, but any FULL_RECT
 	# anchor set on a child is relative to THIS node's real size. Fix it here.
+	# Setting size directly rather than relying only on anchors, since this
+	# node's parent (Main) is a Node2D, not a Control, and anchor-based
+	# resizing wasn't resolving correctly through that gap.
 	set_anchors_preset(Control.PRESET_FULL_RECT)
+	position = Vector2.ZERO
+	size = get_viewport_rect().size
 
 	# Only load starting stations the first time - if the player already owns
 	# stations (returning from StationView), don't re-add duplicates.
