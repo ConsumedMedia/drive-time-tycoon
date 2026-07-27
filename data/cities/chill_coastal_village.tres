@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="City" format=3 uid="uid://cftguv5bdsqfe"]
+
+[ext_resource type="Script" uid="uid://bh0u67d4jgqgg" path="res://resources/city.gd" id="1_0hfj2"]
+
+[resource]
+script = ExtResource("1_0hfj2")
+city_name = "Chill Coastal Village"
+vibe_description = "Laid-back, small, tight-knit. The tutorial city — low stakes, gentle events."
+format_fit = {
+"Chill Lo-Fi": 1.6,
+"Hip-Hop Heat": 0.5
+}
+rival_pressure = 2.0
+acquisition_cost = 5000
+metadata/_custom_type_script = "uid://bh0u67d4jgqgg"

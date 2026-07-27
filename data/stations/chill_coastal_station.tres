@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Station" format=3 uid="uid://dsnmb0jlkcw87"]
+
+[ext_resource type="Script" uid="uid://crcsu7qd5e1bd" path="res://resources/sponsor.gd" id="1_gpqyd"]
+[ext_resource type="Resource" uid="uid://cftguv5bdsqfe" path="res://data/cities/chill_coastal_village.tres" id="2_pakm0"]
+[ext_resource type="Script" uid="uid://b15nj1i7jm0b6" path="res://resources/daypart.gd" id="2_v5pbp"]
+[ext_resource type="Resource" uid="uid://b1jeep4wct3so" path="res://data/sponsors/big_daves_tires.tres" id="2_x11vq"]
+[ext_resource type="Script" uid="uid://blkixtsdy4ysn" path="res://resources/talent.gd" id="3_sgmij"]
+[ext_resource type="Script" uid="uid://cfjvawagcwqr4" path="res://resources/station.gd" id="4_pakm0"]
+[ext_resource type="Resource" uid="uid://dn8td32ehyf2h" path="res://data/formats/chill_lo_fi.tres" id="4_x11vq"]
+[ext_resource type="Resource" uid="uid://dgbao6npu1cbq" path="res://data/talent/dave_old_reliable.tres" id="6_k7xpw"]
+
+[sub_resource type="Resource" id="Resource_x11vq"]
+script = ExtResource("2_v5pbp")
+talent = ExtResource("6_k7xpw")
+metadata/_custom_type_script = "uid://b15nj1i7jm0b6"
+
+[resource]
+script = ExtResource("4_pakm0")
+station_name = "WCLM"
+format = ExtResource("4_x11vq")
+city = ExtResource("2_pakm0")
+listeners = 500
+hype = 20.0
+loyalty = 40.0
+cash = 2000
+dayparts = Array[ExtResource("2_v5pbp")]([SubResource("Resource_x11vq")])
+roster = Array[ExtResource("3_sgmij")]([ExtResource("6_k7xpw")])
+active_sponsors = Array[ExtResource("1_gpqyd")]([ExtResource("2_x11vq")])
+metadata/_custom_type_script = "uid://cfjvawagcwqr4"

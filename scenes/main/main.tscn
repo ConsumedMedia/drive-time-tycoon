@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bbennb3ulr2e"]
+
+[ext_resource type="Script" uid="uid://b6bdhgvajwgmv" path="res://scenes/main/network_overview.gd" id="2_iuonh"]
+
+[node name="Main" type="Node2D" unique_id=122583600]
+
+[node name="NetworkOverview" type="Control" parent="." unique_id=636219773]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_iuonh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NetworkOverview" unique_id=96521990]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NetworkHeader" type="Label" parent="NetworkOverview/VBoxContainer" unique_id=501470802]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="StationList" type="VBoxContainer" parent="NetworkOverview/VBoxContainer" unique_id=516673867]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EndWeekAll" type="Button" parent="NetworkOverview/VBoxContainer" unique_id=2144807407]
+unique_name_in_owner = true
+layout_mode = 2
+text = "End Week All Stations"

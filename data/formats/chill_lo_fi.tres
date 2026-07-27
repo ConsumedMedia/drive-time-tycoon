@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Format" format=3 uid="uid://dn8td32ehyf2h"]
+
+[ext_resource type="Script" uid="uid://ca2cst5tj5g5g" path="res://resources/format.gd" id="1_2agu8"]
+
+[resource]
+script = ExtResource("1_2agu8")
+format_name = "Chill Lo-Fi"
+vibe_tags = Array[String](["chill", "nostalgic"])
+trend_volatility = 0.1
+licensing_cost = 100
+metadata/_custom_type_script = "uid://ca2cst5tj5g5g"

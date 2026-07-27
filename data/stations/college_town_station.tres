@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Station" format=3 uid="uid://bxqq4xxigo61i"]
+
+[ext_resource type="Script" uid="uid://crcsu7qd5e1bd" path="res://resources/sponsor.gd" id="1_j8ih2"]
+[ext_resource type="Script" uid="uid://b15nj1i7jm0b6" path="res://resources/daypart.gd" id="2_2goe1"]
+[ext_resource type="Resource" uid="uid://yruc0rl8ngxa" path="res://data/cities/college_town.tres" id="2_fe1ws"]
+[ext_resource type="Script" uid="uid://blkixtsdy4ysn" path="res://resources/talent.gd" id="3_ym6vr"]
+[ext_resource type="Script" uid="uid://cfjvawagcwqr4" path="res://resources/station.gd" id="4_q1up0"]
+[ext_resource type="Resource" uid="uid://dr21n4k8fngr5" path="res://data/dayparts/morning_jax.tres" id="4_u2q5d"]
+[ext_resource type="Resource" uid="uid://b8evki10ydvsn" path="res://data/formats/pop_hits.tres" id="5_txaqh"]
+[ext_resource type="Resource" uid="uid://rwicg22mvcgp" path="res://data/talent/jax_loose_cannon.tres" id="7_forl8"]
+
+[resource]
+script = ExtResource("4_q1up0")
+station_name = "KJAX"
+format = ExtResource("5_txaqh")
+city = ExtResource("2_fe1ws")
+listeners = 300
+hype = 20.0
+loyalty = 20.0
+cash = 1500
+dayparts = Array[ExtResource("2_2goe1")]([ExtResource("4_u2q5d")])
+roster = Array[ExtResource("3_ym6vr")]([ExtResource("7_forl8")])
+metadata/_custom_type_script = "uid://cfjvawagcwqr4"

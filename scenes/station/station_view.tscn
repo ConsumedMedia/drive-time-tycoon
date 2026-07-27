@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://cx844sr5seoes"]
+
+[ext_resource type="Script" uid="uid://b7jy5squknicf" path="res://scenes/station/control.gd" id="1_i2y0b"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nyl0h"]
+
+[node name="StationView" type="Node2D" unique_id=1549030094]
+
+[node name="Control" type="Control" parent="." unique_id=1021174228]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_i2y0b")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=1365361732]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StationName" type="Label" parent="Control/VBoxContainer" unique_id=446202592]
+unique_name_in_owner = true
+layout_mode = 2
+text = "station name"
+
+[node name="Listeners" type="Label" parent="Control/VBoxContainer" unique_id=1363436980]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Listeners: 0"
+label_settings = SubResource("LabelSettings_nyl0h")
+
+[node name="Hype" type="Label" parent="Control/VBoxContainer" unique_id=1258373239]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Hype: 0"
+
+[node name="Loyalty" type="Label" parent="Control/VBoxContainer" unique_id=1113408194]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Loyalty: 0"
+
+[node name="Cash" type="Label" parent="Control/VBoxContainer" unique_id=19830994]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Cash: 0"
+
+[node name="EndWeek" type="Button" parent="Control/VBoxContainer" unique_id=907426734]
+unique_name_in_owner = true
+layout_mode = 2
+text = "End Week"
+
+[node name="RunPromotion" type="Button" parent="Control/VBoxContainer" unique_id=1249840406]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Run Promotion ($500)"

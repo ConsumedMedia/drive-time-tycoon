@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Daypart" format=3 uid="uid://dr21n4k8fngr5"]
+
+[ext_resource type="Script" uid="uid://b15nj1i7jm0b6" path="res://resources/daypart.gd" id="1_r67se"]
+[ext_resource type="Resource" uid="uid://rwicg22mvcgp" path="res://data/talent/jax_loose_cannon.tres" id="2_3gbnp"]
+
+[resource]
+script = ExtResource("1_r67se")
+talent = ExtResource("2_3gbnp")
+ad_load = "Medium"
+metadata/_custom_type_script = "uid://b15nj1i7jm0b6"

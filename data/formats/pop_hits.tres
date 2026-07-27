@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Format" format=3 uid="uid://b8evki10ydvsn"]
+
+[ext_resource type="Script" uid="uid://ca2cst5tj5g5g" path="res://resources/format.gd" id="1_3imho"]
+
+[resource]
+script = ExtResource("1_3imho")
+format_name = "Pop Hits"
+vibe_tags = Array[String](["energetic", "trendy"])
+trend_volatility = 0.4
+licensing_cost = 300
+metadata/_custom_type_script = "uid://ca2cst5tj5g5g"

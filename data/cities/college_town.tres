@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="City" format=3 uid="uid://yruc0rl8ngxa"]
+
+[ext_resource type="Script" uid="uid://bh0u67d4jgqgg" path="res://resources/city.gd" id="1_0p41u"]
+
+[resource]
+script = ExtResource("1_0p41u")
+city_name = "College Town"
+vibe_description = "Young, broke, loud, trend-chasing."
+format_fit = {
+"Classic Rock": 0.6,
+"Comedy Talk": 1.4,
+"Country Roads": 0.6,
+"Hip-Hop Heat": 1.4,
+"Pop Hits": 1.5
+}
+rival_pressure = 5.0
+acquisition_cost = 12000
+metadata/_custom_type_script = "uid://bh0u67d4jgqgg"

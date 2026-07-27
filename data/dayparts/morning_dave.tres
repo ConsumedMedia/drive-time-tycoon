@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Daypart" format=3 uid="uid://bacf64usb6fcq"]
+
+[ext_resource type="Script" uid="uid://b15nj1i7jm0b6" path="res://resources/daypart.gd" id="1_sf500"]
+[ext_resource type="Resource" uid="uid://dgbao6npu1cbq" path="res://data/talent/dave_old_reliable.tres" id="2_vk53l"]
+
+[resource]
+script = ExtResource("1_sf500")
+talent = ExtResource("2_vk53l")
+metadata/_custom_type_script = "uid://b15nj1i7jm0b6"

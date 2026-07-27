@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Talent" format=3 uid="uid://rwicg22mvcgp"]
+
+[ext_resource type="Script" uid="uid://blkixtsdy4ysn" path="res://resources/talent.gd" id="1_ax4k1"]
+
+[resource]
+script = ExtResource("1_ax4k1")
+talent_name = "Jax Riley"
+personality_trait = "Loose Cannon"
+skill = 7
+salary = 450
+contract_weeks_remaining = 52
+metadata/_custom_type_script = "uid://blkixtsdy4ysn"

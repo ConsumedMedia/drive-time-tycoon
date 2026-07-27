@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Sponsor" format=3 uid="uid://b1jeep4wct3so"]
+
+[ext_resource type="Script" uid="uid://crcsu7qd5e1bd" path="res://resources/sponsor.gd" id="1_sqqp8"]
+
+[resource]
+script = ExtResource("1_sqqp8")
+sponsor_name = "Big Dave's Tire Emporium"
+payout = 200
+demand_description = "\"Wants Morning slot filled\""
+demanded_daypart = "Morning"
+metadata/_custom_type_script = "uid://crcsu7qd5e1bd"
