@@ -51,10 +51,10 @@ func produce(budget: int, assigned_hosts: Array[Talent]) -> void:
 		avg_talent_skill /= hosts.size()
 
 	# Budget contributes up to 50 points (diminishing past a soft cap of 500),
-	# talent skill contributes the other 50. Tune the budget divisor as you
-	# playtest - this is a starting point, not a final balance pass.
+	# talent skill contributes the other 50. Talent.skill is 1-10, so it's
+	# rescaled to a 0-50 range here rather than assumed to already be 0-100.
 	var budget_score: float = clamp(float(budget) / 10.0, 0.0, 50.0)
-	var talent_score: float = clamp(avg_talent_skill * 0.5, 0.0, 50.0)
+	var talent_score: float = clamp((avg_talent_skill / 10.0) * 50.0, 0.0, 50.0)
 
 	quality = clamp(budget_score + talent_score, 0.0, 100.0)
 
