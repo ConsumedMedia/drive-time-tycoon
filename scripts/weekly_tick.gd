@@ -25,6 +25,16 @@ const SLOT_TO_STRING := {
 }
 
 
+## Network-wide tick, called by the "End Week (All Stations)" button.
+## Runs every owned station's week, then handles network-level upkeep.
+func run_weekly_tick() -> void:
+	GameState.current_week += 1
+	GameState.cash -= GameState.total_weekly_salaries()
+
+	for station in GameState.owned_stations:
+		run_station_week(station)
+
+
 func run_station_week(station: Station) -> void:
 	var total_listeners_change := 0.0
 	var reputation_delta := 0.0
