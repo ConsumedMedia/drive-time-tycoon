@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://b38xnk8okmg0c"]
+
+[ext_resource type="Script" uid="uid://dfxd77u4n0mfp" path="res://scenes/ui/market_research_panel.gd" id="1_v84xr"]
+
+[node name="Control" type="Control" unique_id=111442101]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v84xr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1682127798]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CityOption" type="OptionButton" parent="VBoxContainer" unique_id=1451680001]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="AnalystOption" type="OptionButton" parent="VBoxContainer" unique_id=449158750]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RunResearchButton" type="Button" parent="VBoxContainer" unique_id=1544325898]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Run Research"
+
+[node name="ResultLabel" type="Label" parent="VBoxContainer" unique_id=2092166320]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Results: "
