@@ -28,3 +28,50 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 text = "End Week All Stations"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NetworkOverview/VBoxContainer" unique_id=1100290405]
+layout_mode = 2
+
+[node name="CashLabel" type="Label" parent="NetworkOverview/VBoxContainer/HBoxContainer" unique_id=737982915]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ReputationLabel" type="Label" parent="NetworkOverview/VBoxContainer/HBoxContainer" unique_id=1153183847]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ListenersLabel" type="Label" parent="NetworkOverview/VBoxContainer/HBoxContainer" unique_id=267043759]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="WeekLabel" type="Label" parent="NetworkOverview/VBoxContainer/HBoxContainer" unique_id=1957325027]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MenuButton" type="Button" parent="NetworkOverview/VBoxContainer/HBoxContainer" unique_id=1137860947]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Menu"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="NetworkOverview/VBoxContainer" unique_id=666701502]
+layout_mode = 2
+
+[node name="MarketResearchButton" type="Button" parent="NetworkOverview/VBoxContainer/HBoxContainer2" unique_id=1187143213]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Market Research"
+
+[node name="AcquisitionButton" type="Button" parent="NetworkOverview/VBoxContainer/HBoxContainer2" unique_id=1538216373]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Acquisition"
+
+[node name="NetworkAnalyticsButton" type="Button" parent="NetworkOverview/VBoxContainer/HBoxContainer2" unique_id=974024864]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Network Analytics"
+
+[node name="HQButton" type="Button" parent="NetworkOverview/VBoxContainer/HBoxContainer2" unique_id=479273470]
+unique_name_in_owner = true
+layout_mode = 2
+text = "HQ"

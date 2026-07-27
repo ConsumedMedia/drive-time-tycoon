@@ -24,6 +24,11 @@ var market_research: Array[MarketResearch] = []
 ## Tracks in-game week count, used for research staleness and other time-based logic
 var current_week: int = 0
 
+## Which station the player has drilled into from the Network View.
+## Set this before changing scene to station_view.tscn - StationView reads
+## this instead of a hardcoded station path.
+var selected_station: Station = null
+
 ## Called once when the game starts / new game begins
 func start_new_game() -> void:
 	network_name = "New Network"
@@ -35,10 +40,15 @@ func start_new_game() -> void:
 	talent_pool.clear()
 	analyst_pool.clear()
 	market_research.clear()
+	selected_station = null
 
 ## Adds a newly built or acquired station to the network
 func add_station(station: Station) -> void:
 	owned_stations.append(station)
+
+## Sets which station StationView should display when it loads
+func select_station(station: Station) -> void:
+	selected_station = station
 
 ## Total weekly salary obligation across every owned station's roster
 func total_weekly_salaries() -> int:
@@ -46,6 +56,13 @@ func total_weekly_salaries() -> int:
 	for station in owned_stations:
 		for talent in station.roster:
 			total += talent.salary
+	return total
+
+## Sum of listeners across every owned station, for the network-level top bar
+func total_network_listeners() -> int:
+	var total: int = 0
+	for station in owned_stations:
+		total += station.listeners
 	return total
 
 ## Looks up existing research for a given city, or null if never researched
