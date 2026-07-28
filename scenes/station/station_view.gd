@@ -78,19 +78,21 @@ func _open_overlay(panel: Control) -> void:
 
 	var content_panel := PanelContainer.new()
 	content_panel.set_anchors_preset(Control.PRESET_CENTER)
+	content_panel.add_child(panel)
 
-	var content_box := VBoxContainer.new()
-	content_box.add_theme_constant_override("separation", 8)
-
+	# Close floats independently in the corner rather than stacking above the
+	# panel in a shared VBoxContainer - that stacking approach kept collapsing
+	# because the panel's own internal layout doesn't report a size upward
+	# the way a Container-managed child normally would.
 	var close_button := Button.new()
 	close_button.text = "X Close"
-	close_button.custom_minimum_size = Vector2(0, 36)
+	close_button.custom_minimum_size = Vector2(100, 36)
 	close_button.pressed.connect(_close_overlay)
-	content_box.add_child(close_button)
-	content_box.add_child(panel)
+	close_button.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	close_button.position -= Vector2(20, -20)
 
-	content_panel.add_child(content_box)
 	backdrop.add_child(content_panel)
+	backdrop.add_child(close_button)
 
 	%OverlayContainer.add_child(backdrop)
 	current_overlay = backdrop
