@@ -20,6 +20,7 @@ extends Control
 ]
 
 const MARKET_RESEARCH_PANEL := preload("res://scenes/ui/market_research_panel.tscn")
+const NETWORK_ANALYTICS_PANEL := preload("res://scenes/ui/network_analytics_panel.tscn")
 
 var current_overlay: Control = null
 
@@ -80,7 +81,7 @@ func _on_acquisition_pressed() -> void:
 	print("Acquisition panel not built yet - Phase 1 item still outstanding.")
 
 func _on_network_analytics_pressed() -> void:
-	print("Network Analytics panel not built yet - Phase 1 item still outstanding.")
+	_open_overlay(NETWORK_ANALYTICS_PANEL.instantiate())
 
 func _on_hq_pressed() -> void:
 	print("HQ/Progression panel not built yet - Phase 2 item.")
@@ -102,7 +103,6 @@ func _open_overlay(panel: Control) -> void:
 	# PanelContainer has a solid background by default (unlike a bare Control
 	# or VBoxContainer), so the actual content reads clearly against the dim.
 	var content_panel := PanelContainer.new()
-	content_panel.set_anchors_preset(Control.PRESET_CENTER)
 	content_panel.add_child(panel)
 
 	# Anchors have been unreliable all session for one-off positioning like
@@ -118,6 +118,15 @@ func _open_overlay(panel: Control) -> void:
 
 	%OverlayContainer.add_child(backdrop)
 	current_overlay = backdrop
+
+	# Center content_panel only after its real size is known (next idle frame) -
+	# calculating this immediately used a stale zero size and made it grow
+	# toward the bottom-right instead of staying centered.
+	call_deferred("_center_content_panel", content_panel)
+
+func _center_content_panel(content_panel: Control) -> void:
+	var viewport_size := get_viewport_rect().size
+	content_panel.position = (viewport_size - content_panel.size) / 2.0
 
 func _close_overlay() -> void:
 	if current_overlay != null:

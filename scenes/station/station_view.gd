@@ -10,6 +10,7 @@ const PROMOTION_HYPE_BOOST: float = 25.0
 const HIRE_TALENT_PANEL := preload("res://scenes/ui/hire_talent_panel.tscn")
 const PRODUCE_SHOW_PANEL := preload("res://scenes/ui/produce_show_panel.tscn")
 const SPONSOR_PANEL := preload("res://scenes/ui/sponsor_panel.tscn")
+const STATION_ANALYTICS_PANEL := preload("res://scenes/ui/station_analytics_panel.tscn")
 
 var station: Station
 var current_overlay: Control = null
@@ -72,7 +73,9 @@ func _on_sponsors_pressed() -> void:
 	_open_overlay(panel)
 
 func _on_station_analytics_pressed() -> void:
-	print("Station Analytics panel not built yet.")
+	var panel := STATION_ANALYTICS_PANEL.instantiate()
+	panel.target_station = station
+	_open_overlay(panel)
 
 func _open_overlay(panel: Control) -> void:
 	_close_overlay()
@@ -83,7 +86,6 @@ func _open_overlay(panel: Control) -> void:
 	backdrop.mouse_filter = Control.MOUSE_FILTER_STOP
 
 	var content_panel := PanelContainer.new()
-	content_panel.set_anchors_preset(Control.PRESET_CENTER)
 	content_panel.add_child(panel)
 
 	# Anchors have been unreliable all session for one-off positioning like
@@ -99,6 +101,15 @@ func _open_overlay(panel: Control) -> void:
 
 	%OverlayContainer.add_child(backdrop)
 	current_overlay = backdrop
+
+	# Center content_panel only after its real size is known (next idle frame) -
+	# calculating this immediately used a stale zero size and made it grow
+	# toward the bottom-right instead of staying centered.
+	call_deferred("_center_content_panel", content_panel)
+
+func _center_content_panel(content_panel: Control) -> void:
+	var viewport_size := get_viewport_rect().size
+	content_panel.position = (viewport_size - content_panel.size) / 2.0
 
 func _close_overlay() -> void:
 	if current_overlay != null:
