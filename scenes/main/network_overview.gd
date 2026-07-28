@@ -9,6 +9,10 @@ extends Control
 	"res://data/stations/college_town_station.tres"
 ]
 
+## Fill this in the Inspector with paths to any candidate Talent .tres files
+## you want available to hire at game start.
+@export var candidate_talent_paths: Array[String] = []
+
 const MARKET_RESEARCH_PANEL := preload("res://scenes/ui/market_research_panel.tscn")
 
 var current_overlay: Control = null
@@ -31,6 +35,10 @@ func _ready() -> void:
 		for path in station_paths:
 			var station: Station = load(path)
 			GameState.add_station(station)
+
+	if GameState.talent_pool.is_empty():
+		for path in candidate_talent_paths:
+			GameState.talent_pool.append(load(path))
 
 	%EndWeekAll.pressed.connect(_on_end_week_all_pressed)
 	%MarketResearchButton.pressed.connect(_on_market_research_pressed)

@@ -7,9 +7,19 @@ extends Control
 const PROMOTION_COST: int = 500
 const PROMOTION_HYPE_BOOST: float = 25.0
 
+const HIRE_TALENT_PANEL := preload("res://scenes/ui/hire_talent_panel.tscn")
+
 var station: Station
+var current_overlay: Control = null
 
 func _ready() -> void:
+	# Same fix as NetworkOverview - this node's parent is a Node2D, not a
+	# Control, so anchor-based resizing doesn't resolve reliably through
+	# that gap. Set pixel size directly instead.
+	set_anchors_preset(Control.PRESET_FULL_RECT)
+	position = Vector2.ZERO
+	size = get_viewport_rect().size
+
 	# Reads whichever station NetworkView selected. Falls back to the first
 	# owned station if none was set, so this scene can still be F6'd standalone.
 	station = GameState.selected_station
@@ -23,6 +33,9 @@ func _ready() -> void:
 	%ProduceShowButton.pressed.connect(_on_produce_show_pressed)
 	%SponsorsButton.pressed.connect(_on_sponsors_pressed)
 	%StationAnalyticsButton.pressed.connect(_on_station_analytics_pressed)
+
+	%OverlayContainer.set_anchors_preset(Control.PRESET_FULL_RECT)
+	%OverlayContainer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 	_refresh_labels()
 
@@ -40,7 +53,9 @@ func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/main/main.tscn")
 
 func _on_hire_talent_pressed() -> void:
-	print("Hire Talent panel is an empty shell - hire_talent_panel.tscn has no content yet.")
+	var panel := HIRE_TALENT_PANEL.instantiate()
+	panel.target_station = station
+	_open_overlay(panel)
 
 func _on_produce_show_pressed() -> void:
 	print("Produce Show panel not built yet - Phase 1 item still outstanding.")
@@ -50,6 +65,36 @@ func _on_sponsors_pressed() -> void:
 
 func _on_station_analytics_pressed() -> void:
 	print("Station Analytics panel not built yet.")
+
+func _open_overlay(panel: Control) -> void:
+	_close_overlay()
+
+	var backdrop := ColorRect.new()
+	backdrop.color = Color(0.0, 0.0, 0.0, 0.6)
+	backdrop.set_anchors_preset(Control.PRESET_FULL_RECT)
+	backdrop.mouse_filter = Control.MOUSE_FILTER_STOP
+
+	var content_panel := PanelContainer.new()
+	content_panel.set_anchors_preset(Control.PRESET_CENTER)
+
+	var content_box := VBoxContainer.new()
+	var close_button := Button.new()
+	close_button.text = "X Close"
+	close_button.pressed.connect(_close_overlay)
+	content_box.add_child(close_button)
+	content_box.add_child(panel)
+
+	content_panel.add_child(content_box)
+	backdrop.add_child(content_panel)
+
+	%OverlayContainer.add_child(backdrop)
+	current_overlay = backdrop
+
+func _close_overlay() -> void:
+	if current_overlay != null:
+		current_overlay.queue_free()
+		current_overlay = null
+	_refresh_labels()
 
 func _refresh_labels() -> void:
 	if station == null:

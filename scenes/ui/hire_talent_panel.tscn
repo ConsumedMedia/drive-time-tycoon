@@ -1,3 +1,29 @@
 [gd_scene format=3 uid="uid://bpofgl3t8vm66"]
 
-[node name="HireTalentPanel" type="Node2D" unique_id=1572275777]
+[ext_resource type="Script" uid="uid://bwc0k0vc8ae2k" path="res://scenes/ui/hire_talent_panel.gd" id="1_y8x3t"]
+
+[node name="HireTalentPanel" type="Control" unique_id=418134091]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_y8x3t")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1294987984]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CandidateOption" type="OptionButton" parent="VBoxContainer" unique_id=1755889403]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HireButton" type="Button" parent="VBoxContainer" unique_id=2088616969]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Hire"
+
+[node name="ResultLabel" type="Label" parent="VBoxContainer" unique_id=1462340276]
+unique_name_in_owner = true
+layout_mode = 2
