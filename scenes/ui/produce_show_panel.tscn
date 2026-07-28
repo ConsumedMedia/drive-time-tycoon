@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://dhhj4m0n472wi"]
+
+[ext_resource type="Script" uid="uid://buq2063bcuppp" path="res://scenes/ui/produce_show_panel.gd" id="1_0bkyx"]
+
+[node name="Control" type="Control" unique_id=1482228837]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0bkyx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=934233671]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HostOption" type="OptionButton" parent="VBoxContainer" unique_id=174331460]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ShowTypeOption" type="OptionButton" parent="VBoxContainer" unique_id=793050856]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ToneOption" type="OptionButton" parent="VBoxContainer" unique_id=1202270242]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="BudgetInput" type="SpinBox" parent="VBoxContainer" unique_id=1556754917]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 2000.0
+step = 50.0
+
+[node name="DaypartOption" type="OptionButton" parent="VBoxContainer" unique_id=344637777]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ProduceButton" type="Button" parent="VBoxContainer" unique_id=1315810755]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Produce Show"
+
+[node name="ResultLabel" type="Label" parent="VBoxContainer" unique_id=1058723744]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
