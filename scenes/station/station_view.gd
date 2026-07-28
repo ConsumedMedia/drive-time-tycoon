@@ -80,8 +80,11 @@ func _open_overlay(panel: Control) -> void:
 	content_panel.set_anchors_preset(Control.PRESET_CENTER)
 
 	var content_box := VBoxContainer.new()
+	content_box.add_theme_constant_override("separation", 8)
+
 	var close_button := Button.new()
 	close_button.text = "X Close"
+	close_button.custom_minimum_size = Vector2(0, 36)
 	close_button.pressed.connect(_close_overlay)
 	content_box.add_child(close_button)
 	content_box.add_child(panel)
