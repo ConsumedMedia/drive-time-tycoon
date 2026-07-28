@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameState="*uid://cyg4hx8qbmmgt"
 WeeklyTick="*uid://b2ligf5fnsy6g"
+MarketResearchService="*uid://wyvk1nylgwnc"
 
 [display]
 

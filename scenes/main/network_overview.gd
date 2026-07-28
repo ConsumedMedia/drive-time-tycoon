@@ -13,6 +13,12 @@ extends Control
 ## you want available to hire at game start.
 @export var candidate_talent_paths: Array[String] = []
 
+## Fill this in the Inspector with paths to any candidate Sponsor .tres files
+## you want available to court at game start.
+@export var candidate_sponsor_paths: Array[String] = [
+	"res://data/sponsors/big_daves_tires.tres"
+]
+
 const MARKET_RESEARCH_PANEL := preload("res://scenes/ui/market_research_panel.tscn")
 
 var current_overlay: Control = null
@@ -39,6 +45,10 @@ func _ready() -> void:
 	if GameState.talent_pool.is_empty():
 		for path in candidate_talent_paths:
 			GameState.talent_pool.append(load(path))
+
+	if GameState.sponsor_pool.is_empty():
+		for path in candidate_sponsor_paths:
+			GameState.sponsor_pool.append(load(path))
 
 	%EndWeekAll.pressed.connect(_on_end_week_all_pressed)
 	%MarketResearchButton.pressed.connect(_on_market_research_pressed)

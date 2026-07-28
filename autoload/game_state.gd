@@ -18,6 +18,9 @@ var talent_pool: Array[Talent] = []
 ## Analysts not currently assigned (bench/reserve) — used for Market Research
 var analyst_pool: Array[Analyst] = []
 
+## Sponsors not currently courted by any station (bench/reserve)
+var sponsor_pool: Array[Sponsor] = []
+
 ## Market Research results, one per city that's been scouted
 var market_research: Array[MarketResearch] = []
 
@@ -39,6 +42,7 @@ func start_new_game() -> void:
 	owned_stations.clear()
 	talent_pool.clear()
 	analyst_pool.clear()
+	sponsor_pool.clear()
 	market_research.clear()
 	selected_station = null
 

@@ -9,6 +9,7 @@ const PROMOTION_HYPE_BOOST: float = 25.0
 
 const HIRE_TALENT_PANEL := preload("res://scenes/ui/hire_talent_panel.tscn")
 const PRODUCE_SHOW_PANEL := preload("res://scenes/ui/produce_show_panel.tscn")
+const SPONSOR_PANEL := preload("res://scenes/ui/sponsor_panel.tscn")
 
 var station: Station
 var current_overlay: Control = null
@@ -66,7 +67,9 @@ func _on_produce_show_pressed() -> void:
 	_open_overlay(panel)
 
 func _on_sponsors_pressed() -> void:
-	print("Sponsors panel is an empty shell - sponsor_panel.tscn has no content yet.")
+	var panel := SPONSOR_PANEL.instantiate()
+	panel.target_station = station
+	_open_overlay(panel)
 
 func _on_station_analytics_pressed() -> void:
 	print("Station Analytics panel not built yet.")

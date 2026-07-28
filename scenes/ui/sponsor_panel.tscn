@@ -1,3 +1,39 @@
 [gd_scene format=3 uid="uid://crpjl11w50dqt"]
 
-[node name="SponsorPanel" type="Node2D" unique_id=1324140504]
+[ext_resource type="Script" uid="uid://dwmm2dr6ife6n" path="res://scenes/ui/sponsor_panel.gd" id="1_61ogt"]
+
+[node name="Control" type="Control" unique_id=429592253]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_61ogt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1840731853]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ActiveSponsorsLabel" type="Label" parent="VBoxContainer" unique_id=813902035]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
+
+[node name="CandidateOption" type="OptionButton" parent="VBoxContainer" unique_id=191194730]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CourtButton" type="Button" parent="VBoxContainer" unique_id=1432863227]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Court Sponsor"
+
+[node name="ResultLabel" type="Label" parent="VBoxContainer" unique_id=242332138]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
