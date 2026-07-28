@@ -35,6 +35,8 @@ func _ready() -> void:
 	%StationAnalyticsButton.pressed.connect(_on_station_analytics_pressed)
 
 	%OverlayContainer.set_anchors_preset(Control.PRESET_FULL_RECT)
+	%OverlayContainer.position = Vector2.ZERO
+	%OverlayContainer.size = size
 	%OverlayContainer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 	_refresh_labels()
