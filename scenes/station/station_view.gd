@@ -80,16 +80,13 @@ func _open_overlay(panel: Control) -> void:
 	content_panel.set_anchors_preset(Control.PRESET_CENTER)
 	content_panel.add_child(panel)
 
-	# Close floats independently in the corner rather than stacking above the
-	# panel in a shared VBoxContainer - that stacking approach kept collapsing
-	# because the panel's own internal layout doesn't report a size upward
-	# the way a Container-managed child normally would.
+	# Anchors have been unreliable all session for one-off positioning like
+	# this, so just compute the exact pixel position directly instead.
 	var close_button := Button.new()
 	close_button.text = "X Close"
-	close_button.custom_minimum_size = Vector2(100, 36)
+	close_button.size = Vector2(100, 36)
+	close_button.position = Vector2(get_viewport_rect().size.x - 120, 20)
 	close_button.pressed.connect(_close_overlay)
-	close_button.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	close_button.position -= Vector2(20, -20)
 
 	backdrop.add_child(content_panel)
 	backdrop.add_child(close_button)
