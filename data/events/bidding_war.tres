@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="NetworkEvent" format=3]
+
+[ext_resource type="Script" path="res://resources/network_event.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+event_name = "Bidding War"
+description = "A rival station is undercutting your ad rates in this market, and your Hype is taking a hit as advertisers shop around."
+event_tier = "Station"
+trigger_notes = "Random chance per station per week. Effect: -15 Hype."
+has_player_choice = false

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="NetworkEvent" format=3]
+
+[ext_resource type="Script" path="res://resources/network_event.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+event_name = "Viral Clip"
+description = "A clip from one of your Shows blew up online overnight. The station is getting a real buzz boost."
+event_tier = "Station"
+trigger_notes = "Random chance per station per week. Effect: +20 Hype, +5 Reputation."
+has_player_choice = false

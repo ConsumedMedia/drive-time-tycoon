@@ -32,6 +32,11 @@ var current_week: int = 0
 ## this instead of a hardcoded station path.
 var selected_station: Station = null
 
+## Log of fired NetworkEvent messages, newest last. No UI reads this yet -
+## it's here so Station/Network Analytics panels have something to show
+## once they're built.
+var recent_events: Array[String] = []
+
 ## Called once when the game starts / new game begins
 func start_new_game() -> void:
 	network_name = "New Network"
@@ -45,6 +50,7 @@ func start_new_game() -> void:
 	sponsor_pool.clear()
 	market_research.clear()
 	selected_station = null
+	recent_events.clear()
 
 ## Adds a newly built or acquired station to the network
 func add_station(station: Station) -> void:

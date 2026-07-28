@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="NetworkEvent" format=3]
+
+[ext_resource type="Script" path="res://resources/network_event.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+event_name = "Recession Hits"
+description = "A regional economic downturn is squeezing ad budgets across the whole network."
+event_tier = "Network"
+trigger_notes = "Random chance once per week, network-wide. Effect: -10% network Cash, -5 Hype to every owned station."
+has_player_choice = false

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="NetworkEvent" format=3]
+
+[ext_resource type="Script" path="res://resources/network_event.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+event_name = "Star Poach Attempt"
+description = "A rival network tried to poach your top host with a bigger offer. The rumor rattled listeners even though the host stayed."
+event_tier = "Station"
+trigger_notes = "Random chance per station per week, only if roster is non-empty. Effect: -10 Loyalty, +5 Fame for the station's highest-skill Talent. No player choice yet - Phase 2 hook to let the player pay to retain them instead."
+has_player_choice = false

@@ -15,6 +15,22 @@ const SPONSOR_QUALITY_THRESHOLD := 40.0
 const SATISFACTION_DROP_ON_MISS := 15.0
 const SATISFACTION_RECOVERY_ON_HIT := 5.0
 
+## NOT confirmed from any prior design doc - these trigger chances and effect
+## magnitudes are new placeholder values, not pulled from earlier design work.
+## Tune freely as you playtest.
+const STATION_EVENT_CHANCE := 0.15
+const NETWORK_EVENT_CHANCE := 0.10
+
+const STATION_EVENT_POOL: Array[String] = [
+	"res://data/events/bidding_war.tres",
+	"res://data/events/star_poach_attempt.tres",
+	"res://data/events/viral_clip.tres",
+]
+
+const NETWORK_EVENT_POOL: Array[String] = [
+	"res://data/events/recession_hits.tres",
+]
+
 ## Maps Daypart.Slot enum values to the string labels Sponsor uses,
 ## since Sponsor.demanded_daypart is a plain string, not the Slot enum.
 const SLOT_TO_STRING := {
@@ -33,6 +49,8 @@ func run_weekly_tick() -> void:
 
 	for station in GameState.owned_stations:
 		run_station_week(station)
+
+	_process_network_events()
 
 
 func run_station_week(station: Station) -> void:
@@ -86,6 +104,7 @@ func run_station_week(station: Station) -> void:
 	station.loyalty = clamp(station.loyalty + (BASE_LOYALTY_GAIN + total_loyalty_bonus), 0.0, 100.0)
 
 	_process_sponsors(station)
+	_process_station_events(station)
 
 
 ## Each sponsor demands a specific Daypart slot be staffed at a minimum
@@ -129,3 +148,65 @@ func _process_sponsors(station: Station) -> void:
 	for sponsor in sponsors_to_remove:
 		station.active_sponsors.erase(sponsor)
 		# Hook point for Phase 1 UI: surface a "sponsor walked" notification here.
+
+
+## Rolls a chance for one random Station-tier NetworkEvent to fire on this
+## station this week. Effects are applied by name match below - NetworkEvent
+## itself only carries flavor data, actual mechanics live here per its
+## trigger_notes design intent.
+func _process_station_events(station: Station) -> void:
+	if randf() > STATION_EVENT_CHANCE or STATION_EVENT_POOL.is_empty():
+		return
+
+	var event_path: String = STATION_EVENT_POOL[randi() % STATION_EVENT_POOL.size()]
+	var event: NetworkEvent = load(event_path)
+
+	_apply_station_event(event, station)
+	_log_event(event, station)
+
+## Rolls a chance for one random Network-tier NetworkEvent to fire this week.
+func _process_network_events() -> void:
+	if randf() > NETWORK_EVENT_CHANCE or NETWORK_EVENT_POOL.is_empty():
+		return
+
+	var event_path: String = NETWORK_EVENT_POOL[randi() % NETWORK_EVENT_POOL.size()]
+	var event: NetworkEvent = load(event_path)
+
+	_apply_network_event(event)
+	_log_event(event, null)
+
+func _apply_station_event(event: NetworkEvent, station: Station) -> void:
+	match event.event_name:
+		"Bidding War":
+			station.hype = clamp(station.hype - 15.0, 0.0, 100.0)
+		"Star Poach Attempt":
+			if not station.roster.is_empty():
+				var top_talent: Talent = station.roster[0]
+				for talent in station.roster:
+					if talent.skill > top_talent.skill:
+						top_talent = talent
+				station.loyalty = clamp(station.loyalty - 10.0, 0.0, 100.0)
+				top_talent.fame = clamp(top_talent.fame + 5.0, 0.0, 100.0)
+		"Viral Clip":
+			station.hype = clamp(station.hype + 20.0, 0.0, 100.0)
+			station.reputation = clamp(station.reputation + 5.0, 0.0, 100.0)
+
+func _apply_network_event(event: NetworkEvent) -> void:
+	match event.event_name:
+		"Recession Hits":
+			GameState.cash = int(GameState.cash * 0.9)
+			for station in GameState.owned_stations:
+				station.hype = clamp(station.hype - 5.0, 0.0, 100.0)
+
+## Logs a fired event to GameState for future UI, and prints it so it's
+## visible during testing before any event notification UI exists.
+func _log_event(event: NetworkEvent, station: Station) -> void:
+	var context: String = station.station_name if station != null else "Network-wide"
+	var message: String = "[Week %d] %s - %s: %s" % [
+		GameState.current_week,
+		context,
+		event.event_name,
+		event.description
+	]
+	GameState.recent_events.append(message)
+	print(message)
