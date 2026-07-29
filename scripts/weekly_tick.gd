@@ -80,6 +80,8 @@ func _process_show_lifecycle() -> void:
 
 		if station_count > 1:
 			show.apply_syndication_fatigue(station_count)
+		else:
+			show.apply_exclusivity_bonus()
 
 ## Counts how many distinct owned stations currently air this exact Show
 ## (same object, not just same show_name) on any of their Dayparts.

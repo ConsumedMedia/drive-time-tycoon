@@ -74,6 +74,14 @@ func weekly_update() -> void:
 func retire_to_catalog() -> void:
 	is_in_catalog = true
 
+## Called once per week (from WeeklyTick's centralized show lifecycle pass)
+## when this Show is airing on exactly one station. This is the upside half
+## of the Distribution Choice trade-off - staying exclusive slowly builds
+## quality and prestige instead of spending it down via syndication fatigue.
+func apply_exclusivity_bonus() -> void:
+	quality = clamp(quality + 1.5, 0.0, 100.0)
+	prestige = clamp(prestige + 0.5, 0.0, 100.0)
+
 ## Called once per week (from WeeklyTick's centralized show lifecycle pass,
 ## not per-Daypart) when this Show is airing on more than one station.
 ## Quality erodes with overuse - spreading a Show too wide has a real cost,
