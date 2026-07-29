@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="City" format=3]
+
+[ext_resource type="Script" path="res://resources/city.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+city_name = "Retiree Coast"
+vibe_description = "Slower pace, loyal long-term listeners, low tolerance for anything too edgy or loud."
+format_fit = {
+"Chill Lo-Fi": 1.3,
+"Pop Hits": 0.6
+}
+rival_pressure = 3.5
+acquisition_cost = 8000
+metadata/_custom_type_script = "uid://bh0u67d4jgqgg"

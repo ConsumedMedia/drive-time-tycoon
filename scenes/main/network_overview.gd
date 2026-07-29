@@ -21,6 +21,7 @@ extends Control
 
 const MARKET_RESEARCH_PANEL := preload("res://scenes/ui/market_research_panel.tscn")
 const NETWORK_ANALYTICS_PANEL := preload("res://scenes/ui/network_analytics_panel.tscn")
+const ACQUISITION_PANEL := preload("res://scenes/ui/acquisition_panel.tscn")
 
 var current_overlay: Control = null
 
@@ -78,7 +79,7 @@ func _on_market_research_pressed() -> void:
 	_open_overlay(MARKET_RESEARCH_PANEL.instantiate())
 
 func _on_acquisition_pressed() -> void:
-	print("Acquisition panel not built yet - Phase 1 item still outstanding.")
+	_open_overlay(ACQUISITION_PANEL.instantiate())
 
 func _on_network_analytics_pressed() -> void:
 	_open_overlay(NETWORK_ANALYTICS_PANEL.instantiate())
@@ -132,6 +133,7 @@ func _close_overlay() -> void:
 	if current_overlay != null:
 		current_overlay.queue_free()
 		current_overlay = null
+	_refresh_display()
 
 func _refresh_display() -> void:
 	%CashLabel.text = "Cash: $" + str(GameState.cash)
