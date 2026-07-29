@@ -41,6 +41,10 @@ const SLOT_TO_STRING := {
 }
 
 
+## NOT confirmed from any prior design doc - fatigue magnitude per extra
+## syndicated station is a new placeholder value. Tune as you playtest.
+const SYNDICATION_FATIGUE_PER_STATION := 3.0
+
 ## Network-wide tick, called by the "End Week (All Stations)" button.
 ## Runs every owned station's week, then handles network-level upkeep.
 func run_weekly_tick() -> void:
@@ -50,7 +54,43 @@ func run_weekly_tick() -> void:
 	for station in GameState.owned_stations:
 		run_station_week(station)
 
+	_process_show_lifecycle()
 	_process_network_events()
+
+
+## Runs weekly_update() and syndication fatigue exactly once per unique Show,
+## regardless of how many Dayparts (possibly across multiple stations) air
+## it. This has to be centralized rather than done per-Daypart in
+## run_station_week - a syndicated Show sitting on 3 stations would otherwise
+## have weekly_update() (and weeks_running, prestige drift) fire 3 times in
+## a single week, which is wrong.
+func _process_show_lifecycle() -> void:
+	var processed_shows: Array[Show] = []
+
+	for station in GameState.owned_stations:
+		for daypart in station.dayparts:
+			if daypart.is_staffed() and not processed_shows.has(daypart.show):
+				processed_shows.append(daypart.show)
+
+	for show in processed_shows:
+		var station_count: int = _count_stations_airing_show(show)
+		show.syndicated_station_count = max(0, station_count - 1)
+
+		show.weekly_update()
+
+		if station_count > 1:
+			show.apply_syndication_fatigue(station_count)
+
+## Counts how many distinct owned stations currently air this exact Show
+## (same object, not just same show_name) on any of their Dayparts.
+func _count_stations_airing_show(show: Show) -> int:
+	var count := 0
+	for station in GameState.owned_stations:
+		for daypart in station.dayparts:
+			if daypart.show == show:
+				count += 1
+				break
+	return count
 
 
 func run_station_week(station: Station) -> void:
@@ -90,8 +130,6 @@ func run_station_week(station: Station) -> void:
 		# Prestige feeds reputation slowly - a station running high-prestige
 		# Shows should drift toward a strong reputation over time.
 		reputation_delta += (show.prestige - 50.0) * 0.02
-
-		show.weekly_update()
 
 		for host in show.hosts:
 			host.fame = clamp(host.fame + host.get_fame_growth_rate(), 0.0, 100.0)

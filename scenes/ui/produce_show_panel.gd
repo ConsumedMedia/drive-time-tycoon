@@ -1,16 +1,28 @@
 extends Control
 
-## Lets the player produce a Show using a Talent already on the current
-## station's roster, and assign it to one of that station's Dayparts.
+## Lets the player either produce a NEW Show using a Talent already on the
+## current station's roster, or SYNDICATE an existing Show already airing
+## somewhere else in the network onto one of this station's Dayparts.
 ## StationView sets target_station right after instantiating this panel.
 
 var target_station: Station = null
 
+## All Shows currently airing anywhere in the network, excluding ones
+## already airing on target_station (syndicating a Show to a station that
+## already has it doesn't make sense).
+var syndicatable_shows: Array[Show] = []
+
 const SHOW_TYPE_NAMES := ["Music Block", "Talk Show", "News Update", "Countdown", "Call-In", "Syndicated Rerun"]
 const TONE_NAMES := ["Wholesome", "Edgy", "Serious", "Chaotic", "Prestige"]
 const DAYPART_SLOT_NAMES := ["Morning", "Midday", "Afternoon", "Night"]
+const MODE_NAMES := ["Produce New Show", "Syndicate Existing Show"]
 
 func _ready() -> void:
+	%ModeOption.clear()
+	for name in MODE_NAMES:
+		%ModeOption.add_item(name)
+	%ModeOption.item_selected.connect(_on_mode_selected)
+
 	%ShowTypeOption.clear()
 	for name in SHOW_TYPE_NAMES:
 		%ShowTypeOption.add_item(name)
@@ -21,18 +33,30 @@ func _ready() -> void:
 
 	_refresh_host_options()
 	_refresh_daypart_options()
+	_refresh_syndicatable_shows()
 
 	%ProduceButton.pressed.connect(_on_produce_pressed)
+
+	_on_mode_selected(0)
+
+func _on_mode_selected(index: int) -> void:
+	var is_syndicate_mode: bool = index == 1
+
+	%HostOption.visible = not is_syndicate_mode
+	%ShowTypeOption.visible = not is_syndicate_mode
+	%ToneOption.visible = not is_syndicate_mode
+	%BudgetInput.visible = not is_syndicate_mode
+	%ExistingShowOption.visible = is_syndicate_mode
+
+	%ProduceButton.text = "Syndicate Show" if is_syndicate_mode else "Produce Show"
 
 func _refresh_host_options() -> void:
 	%HostOption.clear()
 
 	if target_station == null or target_station.roster.is_empty():
 		%HostOption.add_item("No Talent on roster - hire someone first")
-		%ProduceButton.disabled = true
 		return
 
-	%ProduceButton.disabled = false
 	for talent in target_station.roster:
 		%HostOption.add_item("%s (Skill: %d)" % [talent.talent_name, talent.skill])
 
@@ -47,8 +71,49 @@ func _refresh_daypart_options() -> void:
 		var status: String = "empty" if not daypart.is_staffed() else "will replace current Show"
 		%DaypartOption.add_item("%s (%s)" % [slot_name, status])
 
+func _refresh_syndicatable_shows() -> void:
+	syndicatable_shows.clear()
+	%ExistingShowOption.clear()
+
+	for station in GameState.owned_stations:
+		for daypart in station.dayparts:
+			if not daypart.is_staffed():
+				continue
+			if daypart.show in syndicatable_shows:
+				continue
+			if _station_already_airs_show(target_station, daypart.show):
+				continue
+			syndicatable_shows.append(daypart.show)
+			%ExistingShowOption.add_item(
+				"\"%s\" (Quality: %d, on %d station%s)" % [
+					daypart.show.show_name,
+					int(daypart.show.quality),
+					daypart.show.syndicated_station_count + 1,
+					"" if daypart.show.syndicated_station_count == 0 else "s"
+				]
+			)
+
+	if syndicatable_shows.is_empty():
+		%ExistingShowOption.add_item("No syndicatable Shows available yet")
+
+func _station_already_airs_show(station: Station, show: Show) -> bool:
+	if station == null:
+		return false
+	for daypart in station.dayparts:
+		if daypart.show == show:
+			return true
+	return false
+
 func _on_produce_pressed() -> void:
-	if target_station == null or target_station.roster.is_empty():
+	if target_station == null:
+		return
+
+	if %ModeOption.selected == 1:
+		_on_syndicate_pressed()
+		return
+
+	if target_station.roster.is_empty():
+		%ResultLabel.text = "No Talent on roster - hire someone first."
 		return
 
 	var budget: int = int(%BudgetInput.value)
@@ -75,3 +140,22 @@ func _on_produce_pressed() -> void:
 	]
 
 	_refresh_daypart_options()
+	_refresh_syndicatable_shows()
+
+func _on_syndicate_pressed() -> void:
+	if syndicatable_shows.is_empty():
+		return
+
+	var show: Show = syndicatable_shows[%ExistingShowOption.selected]
+	var daypart: Daypart = target_station.dayparts[%DaypartOption.selected]
+
+	daypart.assign_show(show)
+
+	%ResultLabel.text = "Syndicated \"%s\" onto %s's %s slot." % [
+		show.show_name,
+		target_station.station_name,
+		DAYPART_SLOT_NAMES[daypart.slot]
+	]
+
+	_refresh_daypart_options()
+	_refresh_syndicatable_shows()

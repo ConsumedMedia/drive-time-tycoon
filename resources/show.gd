@@ -73,3 +73,13 @@ func weekly_update() -> void:
 ## Phase 2 hook: back-catalog monetization reads is_in_catalog.
 func retire_to_catalog() -> void:
 	is_in_catalog = true
+
+## Called once per week (from WeeklyTick's centralized show lifecycle pass,
+## not per-Daypart) when this Show is airing on more than one station.
+## Quality erodes with overuse - spreading a Show too wide has a real cost,
+## the trade-off Distribution Choice is meant to hinge on.
+func apply_syndication_fatigue(station_count: int) -> void:
+	if station_count <= 1:
+		return
+	var fatigue: float = float(station_count - 1) * 3.0
+	quality = clamp(quality - fatigue, 0.0, 100.0)
