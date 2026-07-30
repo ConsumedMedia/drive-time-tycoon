@@ -37,6 +37,12 @@ enum Tone {
 @export var weeks_running: int = 0
 @export var is_in_catalog: bool = false
 
+## Highest prestige this Show has ever reached, tracked in weekly_update().
+## Back-catalog income is based on this rather than current prestige, so a
+## retired Show's payout reflects its best run, not wherever it happened to
+## be sitting the week it got pulled.
+@export var peak_prestige: float = 0.0
+
 ## Recomputes quality from production_budget and host skill.
 ## Call this once at production time, not every week - quality is meant to be
 ## a snapshot of how well-made the Show is, not something that drifts on its own.
@@ -68,6 +74,8 @@ func weekly_update() -> void:
 		prestige = clamp(prestige + 1.0, 0.0, 100.0)
 	elif quality < 40.0:
 		prestige = clamp(prestige - 1.5, 0.0, 100.0)
+
+	peak_prestige = max(peak_prestige, prestige)
 
 ## Retires the Show from active rotation into the back-catalog.
 ## Phase 2 hook: back-catalog monetization reads is_in_catalog.

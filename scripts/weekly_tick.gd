@@ -45,6 +45,10 @@ const SLOT_TO_STRING := {
 ## syndicated station is a new placeholder value. Tune as you playtest.
 const SYNDICATION_FATIGUE_PER_STATION := 3.0
 
+## NOT confirmed from any prior design doc - back-catalog income per point
+## of peak_prestige is a new placeholder value. Tune as you playtest.
+const CATALOG_INCOME_PER_PRESTIGE := 2.0
+
 ## Network-wide tick, called by the "End Week (All Stations)" button.
 ## Runs every owned station's week, then handles network-level upkeep.
 func run_weekly_tick() -> void:
@@ -55,6 +59,7 @@ func run_weekly_tick() -> void:
 		run_station_week(station)
 
 	_process_show_lifecycle()
+	_process_catalog_income()
 	_process_network_events()
 
 
@@ -95,9 +100,21 @@ func _count_stations_airing_show(show: Show) -> int:
 	return count
 
 
+## Pays out passive income for every retired Show in GameState.show_catalog,
+## based on the prestige it reached before retirement. Runs once per week,
+## network-wide - retired Shows aren't tied to any single station anymore.
+func _process_catalog_income() -> void:
+	var total_income := 0
+	for show in GameState.show_catalog:
+		total_income += int(show.peak_prestige * CATALOG_INCOME_PER_PRESTIGE)
+
+	GameState.cash += total_income
+
+
 func run_station_week(station: Station) -> void:
 	var total_listeners_change := 0.0
-	var reputation_delta := 0.0
+	var critical_reputation_delta := 0.0
+	var commercial_reputation_delta := 0.0
 	var total_hype_decay_bonus := 0.0
 	var total_loyalty_bonus := 0.0
 
@@ -110,7 +127,13 @@ func run_station_week(station: Station) -> void:
 		var show: Show = daypart.show
 		var format_fit: float = station.city.get_format_fit(station.format)
 		var loyalty_multiplier: float = 1.0 + (station.loyalty / 100.0)
-		var rival_pressure: float = station.city.rival_pressure
+
+		# NOT confirmed from any prior design doc - a well-respected station
+		# shrugging off rival pressure is a new placeholder mechanic tying
+		# Critical Reputation to something concrete. Tune as you playtest.
+		var effective_rival_pressure: float = (
+			station.city.rival_pressure * (1.0 - station.critical_reputation / 200.0)
+		)
 
 		var trait_effects := 0.0
 		for host in show.hosts:
@@ -123,21 +146,31 @@ func run_station_week(station: Station) -> void:
 		var listeners_change: float = (
 			(station.hype * format_fit)
 			+ (show.quality * loyalty_multiplier)
-			- rival_pressure
+			- effective_rival_pressure
 			+ trait_effects
 		)
 
 		total_listeners_change += listeners_change
 
-		# Prestige feeds reputation slowly - a station running high-prestige
-		# Shows should drift toward a strong reputation over time.
-		reputation_delta += (show.prestige - 50.0) * 0.02
+		# Prestige feeds Critical Reputation, Hype feeds Commercial Reputation -
+		# the two axes Distribution Choice already differentiates (exclusive,
+		# high-prestige Shows vs. wide, high-reach syndication). Scales
+		# directly off the stat rather than a -50 baseline (the old single
+		# Reputation formula assumed values hover near a midpoint, which
+		# doesn't hold for a fresh Show/station starting at 0).
+		critical_reputation_delta += show.prestige * 0.05
+		commercial_reputation_delta += station.hype * 0.02
 
 		for host in show.hosts:
 			host.fame = clamp(host.fame + host.get_fame_growth_rate(), 0.0, 100.0)
 
 	station.listeners = max(0, station.listeners + total_listeners_change)
-	station.reputation = clamp(station.reputation + reputation_delta, 0.0, 100.0)
+	station.critical_reputation = clamp(
+		station.critical_reputation + critical_reputation_delta, 0.0, 100.0
+	)
+	station.commercial_reputation = clamp(
+		station.commercial_reputation + commercial_reputation_delta, 0.0, 100.0
+	)
 
 	# Flat weekly hype decay plus any trait bonuses (e.g. Loose Cannon hosts).
 	station.hype = clamp(station.hype - (BASE_HYPE_DECAY + total_hype_decay_bonus), 0.0, 100.0)
@@ -173,7 +206,11 @@ func _process_sponsors(station: Station) -> void:
 					break
 
 		if demand_met:
-			station.cash += sponsor.payout
+			# NOT confirmed from any prior design doc - Commercial Reputation
+			# boosting sponsor payout is a new placeholder mechanic. Tune as
+			# you playtest.
+			var payout: int = int(sponsor.payout * (1.0 + station.commercial_reputation / 200.0))
+			station.cash += payout
 			sponsor.satisfaction = clamp(
 				sponsor.satisfaction + SATISFACTION_RECOVERY_ON_HIT, 0.0, 100.0
 			)
@@ -229,7 +266,7 @@ func _apply_station_event(event: NetworkEvent, station: Station) -> void:
 				top_talent.fame = clamp(top_talent.fame + 5.0, 0.0, 100.0)
 		"Viral Clip":
 			station.hype = clamp(station.hype + 20.0, 0.0, 100.0)
-			station.reputation = clamp(station.reputation + 5.0, 0.0, 100.0)
+			station.commercial_reputation = clamp(station.commercial_reputation + 5.0, 0.0, 100.0)
 
 func _apply_network_event(event: NetworkEvent) -> void:
 	match event.event_name:

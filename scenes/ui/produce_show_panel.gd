@@ -15,7 +15,7 @@ var syndicatable_shows: Array[Show] = []
 const SHOW_TYPE_NAMES := ["Music Block", "Talk Show", "News Update", "Countdown", "Call-In", "Syndicated Rerun"]
 const TONE_NAMES := ["Wholesome", "Edgy", "Serious", "Chaotic", "Prestige"]
 const DAYPART_SLOT_NAMES := ["Morning", "Midday", "Afternoon", "Night"]
-const MODE_NAMES := ["Produce New Show", "Syndicate Existing Show"]
+const MODE_NAMES := ["Produce New Show", "Syndicate Existing Show", "Retire Show to Catalog"]
 
 func _ready() -> void:
 	%ModeOption.clear()
@@ -41,14 +41,21 @@ func _ready() -> void:
 
 func _on_mode_selected(index: int) -> void:
 	var is_syndicate_mode: bool = index == 1
+	var is_retire_mode: bool = index == 2
+	var is_produce_mode: bool = index == 0
 
-	%HostOption.visible = not is_syndicate_mode
-	%ShowTypeOption.visible = not is_syndicate_mode
-	%ToneOption.visible = not is_syndicate_mode
-	%BudgetInput.visible = not is_syndicate_mode
+	%HostOption.visible = is_produce_mode
+	%ShowTypeOption.visible = is_produce_mode
+	%ToneOption.visible = is_produce_mode
+	%BudgetInput.visible = is_produce_mode
 	%ExistingShowOption.visible = is_syndicate_mode
 
-	%ProduceButton.text = "Syndicate Show" if is_syndicate_mode else "Produce Show"
+	if is_syndicate_mode:
+		%ProduceButton.text = "Syndicate Show"
+	elif is_retire_mode:
+		%ProduceButton.text = "Retire to Catalog"
+	else:
+		%ProduceButton.text = "Produce Show"
 
 func _refresh_host_options() -> void:
 	%HostOption.clear()
@@ -112,6 +119,10 @@ func _on_produce_pressed() -> void:
 		_on_syndicate_pressed()
 		return
 
+	if %ModeOption.selected == 2:
+		_on_retire_pressed()
+		return
+
 	if target_station.roster.is_empty():
 		%ResultLabel.text = "No Talent on roster - hire someone first."
 		return
@@ -155,6 +166,36 @@ func _on_syndicate_pressed() -> void:
 		show.show_name,
 		target_station.station_name,
 		DAYPART_SLOT_NAMES[daypart.slot]
+	]
+
+	_refresh_daypart_options()
+	_refresh_syndicatable_shows()
+
+## Pulls the Show off EVERY station currently airing it (not just this one -
+## retiring is a network-wide action on the Show itself, since it's the same
+## underlying object wherever it's syndicated) and moves it into
+## GameState.show_catalog for passive income.
+func _on_retire_pressed() -> void:
+	var daypart: Daypart = target_station.dayparts[%DaypartOption.selected]
+
+	if not daypart.is_staffed():
+		%ResultLabel.text = "That slot is already empty - nothing to retire."
+		return
+
+	var show: Show = daypart.show
+	show.retire_to_catalog()
+
+	for station in GameState.owned_stations:
+		for other_daypart in station.dayparts:
+			if other_daypart.show == show:
+				other_daypart.clear()
+
+	if not GameState.show_catalog.has(show):
+		GameState.show_catalog.append(show)
+
+	%ResultLabel.text = "Retired \"%s\" to the back catalog (Peak Prestige: %d). It's now earning passive income." % [
+		show.show_name,
+		int(show.peak_prestige)
 	]
 
 	_refresh_daypart_options()

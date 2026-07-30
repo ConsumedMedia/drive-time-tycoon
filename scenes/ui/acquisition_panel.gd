@@ -86,7 +86,8 @@ func _on_found_pressed() -> void:
 	station.hype = STARTING_HYPE
 	station.loyalty = STARTING_LOYALTY
 	station.cash = STARTING_CASH
-	station.reputation = 0.0
+	station.critical_reputation = 0.0
+	station.commercial_reputation = 0.0
 
 	for slot in Daypart.Slot.values():
 		var daypart := Daypart.new()

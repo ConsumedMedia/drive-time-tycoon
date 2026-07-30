@@ -21,14 +21,34 @@ func _refresh() -> void:
 
 	for station in GameState.owned_stations:
 		lines.append(
-			"%s | Listeners: %d | Hype: %d | Reputation: %d | Cash: $%d" % [
+			"%s | Listeners: %d | Hype: %d | Critical Rep: %d | Commercial Rep: %d | Cash: $%d" % [
 				station.station_name,
 				station.listeners,
 				int(station.hype),
-				int(station.reputation),
+				int(station.critical_reputation),
+				int(station.commercial_reputation),
 				station.cash
 			]
 		)
+
+	lines.append("")
+	lines.append("--- Back Catalog ---")
+
+	if GameState.show_catalog.is_empty():
+		lines.append("No retired Shows yet.")
+	else:
+		var total_catalog_income := 0
+		for show in GameState.show_catalog:
+			var weekly_income: int = int(show.peak_prestige * WeeklyTick.CATALOG_INCOME_PER_PRESTIGE)
+			total_catalog_income += weekly_income
+			lines.append(
+				"\"%s\" | Peak Prestige: %d | Earning $%d/wk" % [
+					show.show_name,
+					int(show.peak_prestige),
+					weekly_income
+				]
+			)
+		lines.append("Total Catalog Income: $%d/wk" % total_catalog_income)
 
 	lines.append("")
 	lines.append("--- Recent Events ---")

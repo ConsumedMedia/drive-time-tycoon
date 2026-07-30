@@ -11,7 +11,12 @@ class_name Station
 @export var hype: float = 0.0        # 0-100
 @export var loyalty: float = 0.0     # 0-100
 @export var cash: int = 0
-@export var reputation: float = 0.0  # 0-100, local to this station
+## Split from a single Reputation stat - Critical is driven by prestige/quality
+## content, Commercial is driven by reach/hype/mass appeal. Deliberately
+## deferred in earlier design, revisited now that Syndication/Distribution
+## Choice give the two axes something real to differentiate.
+@export var critical_reputation: float = 0.0    # 0-100
+@export var commercial_reputation: float = 0.0  # 0-100
 
 ## Dayparts: Morning, Midday, Afternoon, Night
 @export var dayparts: Array[Daypart] = []

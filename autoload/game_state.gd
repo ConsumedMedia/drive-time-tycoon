@@ -37,6 +37,9 @@ var selected_station: Station = null
 ## once they're built.
 var recent_events: Array[String] = []
 
+## Retired Shows generating passive back-catalog income each week.
+var show_catalog: Array[Show] = []
+
 ## Called once when the game starts / new game begins
 func start_new_game() -> void:
 	network_name = "New Network"
@@ -51,6 +54,7 @@ func start_new_game() -> void:
 	market_research.clear()
 	selected_station = null
 	recent_events.clear()
+	show_catalog.clear()
 
 ## Adds a newly built or acquired station to the network
 func add_station(station: Station) -> void:
