@@ -94,8 +94,8 @@ func apply_exclusivity_bonus() -> void:
 ## not per-Daypart) when this Show is airing on more than one station.
 ## Quality erodes with overuse - spreading a Show too wide has a real cost,
 ## the trade-off Distribution Choice is meant to hinge on.
-func apply_syndication_fatigue(station_count: int) -> void:
+func apply_syndication_fatigue(station_count: int, fatigue_per_station: float) -> void:
 	if station_count <= 1:
 		return
-	var fatigue: float = float(station_count - 1) * 3.0
+	var fatigue: float = float(station_count - 1) * fatigue_per_station
 	quality = clamp(quality - fatigue, 0.0, 100.0)

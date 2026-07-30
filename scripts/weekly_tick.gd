@@ -25,10 +25,14 @@ const STATION_EVENT_POOL: Array[String] = [
 	"res://data/events/bidding_war.tres",
 	"res://data/events/star_poach_attempt.tres",
 	"res://data/events/viral_clip.tres",
+	"res://data/events/critical_acclaim.tres",
+	"res://data/events/syndication_backlash.tres",
+	"res://data/events/ratings_sweep.tres",
 ]
 
 const NETWORK_EVENT_POOL: Array[String] = [
 	"res://data/events/recession_hits.tres",
+	"res://data/events/analyst_breakthrough.tres",
 ]
 
 ## Maps Daypart.Slot enum values to the string labels Sponsor uses,
@@ -84,7 +88,7 @@ func _process_show_lifecycle() -> void:
 		show.weekly_update()
 
 		if station_count > 1:
-			show.apply_syndication_fatigue(station_count)
+			show.apply_syndication_fatigue(station_count, SYNDICATION_FATIGUE_PER_STATION)
 		else:
 			show.apply_exclusivity_bonus()
 
@@ -228,29 +232,78 @@ func _process_sponsors(station: Station) -> void:
 
 
 ## Rolls a chance for one random Station-tier NetworkEvent to fire on this
-## station this week. Effects are applied by name match below - NetworkEvent
+## station this week. Only events whose conditions are actually met are
+## eligible - a Show-quality event shouldn't fire on a station with dead air,
+## for instance. Effects are applied by name match below - NetworkEvent
 ## itself only carries flavor data, actual mechanics live here per its
 ## trigger_notes design intent.
 func _process_station_events(station: Station) -> void:
 	if randf() > STATION_EVENT_CHANCE or STATION_EVENT_POOL.is_empty():
 		return
 
-	var event_path: String = STATION_EVENT_POOL[randi() % STATION_EVENT_POOL.size()]
+	var eligible_paths: Array[String] = []
+	for event_path in STATION_EVENT_POOL:
+		var event: NetworkEvent = load(event_path)
+		if _station_event_is_eligible(event, station):
+			eligible_paths.append(event_path)
+
+	if eligible_paths.is_empty():
+		return
+
+	var event_path: String = eligible_paths[randi() % eligible_paths.size()]
 	var event: NetworkEvent = load(event_path)
 
 	_apply_station_event(event, station)
 	_log_event(event, station)
 
+func _station_event_is_eligible(event: NetworkEvent, station: Station) -> bool:
+	match event.event_name:
+		"Critical Acclaim":
+			for daypart in station.dayparts:
+				if (
+					daypart.is_staffed()
+					and daypart.show.syndicated_station_count == 0
+					and daypart.show.quality >= 70.0
+				):
+					return true
+			return false
+		"Syndication Backlash":
+			for daypart in station.dayparts:
+				if daypart.is_staffed() and daypart.show.syndicated_station_count > 0:
+					return true
+			return false
+		"Ratings Sweep":
+			return station.commercial_reputation >= 30.0
+		_:
+			return true
+
 ## Rolls a chance for one random Network-tier NetworkEvent to fire this week.
+## Same eligibility filtering as station events.
 func _process_network_events() -> void:
 	if randf() > NETWORK_EVENT_CHANCE or NETWORK_EVENT_POOL.is_empty():
 		return
 
-	var event_path: String = NETWORK_EVENT_POOL[randi() % NETWORK_EVENT_POOL.size()]
+	var eligible_paths: Array[String] = []
+	for event_path in NETWORK_EVENT_POOL:
+		var event: NetworkEvent = load(event_path)
+		if _network_event_is_eligible(event):
+			eligible_paths.append(event_path)
+
+	if eligible_paths.is_empty():
+		return
+
+	var event_path: String = eligible_paths[randi() % eligible_paths.size()]
 	var event: NetworkEvent = load(event_path)
 
 	_apply_network_event(event)
 	_log_event(event, null)
+
+func _network_event_is_eligible(event: NetworkEvent) -> bool:
+	match event.event_name:
+		"Analyst Breakthrough":
+			return not GameState.analyst_pool.is_empty()
+		_:
+			return true
 
 func _apply_station_event(event: NetworkEvent, station: Station) -> void:
 	match event.event_name:
@@ -267,6 +320,13 @@ func _apply_station_event(event: NetworkEvent, station: Station) -> void:
 		"Viral Clip":
 			station.hype = clamp(station.hype + 20.0, 0.0, 100.0)
 			station.commercial_reputation = clamp(station.commercial_reputation + 5.0, 0.0, 100.0)
+		"Critical Acclaim":
+			station.critical_reputation = clamp(station.critical_reputation + 5.0, 0.0, 100.0)
+		"Syndication Backlash":
+			station.loyalty = clamp(station.loyalty - 10.0, 0.0, 100.0)
+		"Ratings Sweep":
+			station.listeners += 50
+			station.hype = clamp(station.hype + 10.0, 0.0, 100.0)
 
 func _apply_network_event(event: NetworkEvent) -> void:
 	match event.event_name:
@@ -274,6 +334,10 @@ func _apply_network_event(event: NetworkEvent) -> void:
 			GameState.cash = int(GameState.cash * 0.9)
 			for station in GameState.owned_stations:
 				station.hype = clamp(station.hype - 5.0, 0.0, 100.0)
+		"Analyst Breakthrough":
+			if not GameState.analyst_pool.is_empty():
+				var analyst: Analyst = GameState.analyst_pool[randi() % GameState.analyst_pool.size()]
+				analyst.experience = clamp(analyst.experience + 20.0, 0.0, 100.0)
 
 ## Logs a fired event to GameState for future UI, and prints it so it's
 ## visible during testing before any event notification UI exists.

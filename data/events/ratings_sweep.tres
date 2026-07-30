@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="NetworkEvent" format=3]
+
+[ext_resource type="Script" path="res://resources/network_event.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+event_name = "Ratings Sweep"
+description = "A great ratings period landed - your mass-market reputation is paying off."
+event_tier = "Station"
+trigger_notes = "Only eligible if the station's Commercial Reputation is 30 or higher. Effect: +50 Listeners, +10 Hype."
+has_player_choice = false

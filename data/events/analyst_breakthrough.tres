@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="NetworkEvent" format=3]
+
+[ext_resource type="Script" path="res://resources/network_event.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+event_name = "Analyst Breakthrough"
+description = "One of your bench analysts had a breakthrough studying market data and is now noticeably sharper."
+event_tier = "Network"
+trigger_notes = "Only eligible if GameState.analyst_pool is non-empty. Effect: +20 Experience to a random analyst in the pool."
+has_player_choice = false

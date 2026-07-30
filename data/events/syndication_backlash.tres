@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="NetworkEvent" format=3]
+
+[ext_resource type="Script" path="res://resources/network_event.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+event_name = "Syndication Backlash"
+description = "Loyal listeners are grumbling that this Show feels like reheated leftovers from another station."
+event_tier = "Station"
+trigger_notes = "Only eligible if the station has a staffed Show currently syndicated to another station. Effect: -10 Loyalty."
+has_player_choice = false
