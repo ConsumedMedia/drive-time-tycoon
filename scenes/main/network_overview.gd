@@ -22,6 +22,7 @@ extends Control
 const MARKET_RESEARCH_PANEL := preload("res://scenes/ui/market_research_panel.tscn")
 const NETWORK_ANALYTICS_PANEL := preload("res://scenes/ui/network_analytics_panel.tscn")
 const ACQUISITION_PANEL := preload("res://scenes/ui/acquisition_panel.tscn")
+const HQ_PANEL := preload("res://scenes/ui/hq_panel.tscn")
 
 var current_overlay: Control = null
 
@@ -85,7 +86,7 @@ func _on_network_analytics_pressed() -> void:
 	_open_overlay(NETWORK_ANALYTICS_PANEL.instantiate())
 
 func _on_hq_pressed() -> void:
-	print("HQ/Progression panel not built yet - Phase 2 item.")
+	_open_overlay(HQ_PANEL.instantiate())
 
 func _on_menu_pressed() -> void:
 	print("Save/Load/Settings menu not built yet. Quit works via the OS window controls for now.")

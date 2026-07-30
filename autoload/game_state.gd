@@ -9,6 +9,13 @@ var network_reputation: float = 0.0
 ## HQ upgrade tier — gates loans, sponsor bundle slots, scouting bonuses
 var hq_tier: int = 1
 
+## NOT confirmed from any prior design doc - max tier and per-tier bonus
+## magnitudes are new placeholder values. Tune as you playtest.
+const MAX_HQ_TIER := 5
+const HQ_ACQUISITION_DISCOUNT_PER_TIER := 0.05
+const HQ_SALARY_DISCOUNT_PER_TIER := 0.02
+const HQ_RESEARCH_ACCURACY_BONUS_PER_TIER := 5.0
+
 ## Stations the player currently owns
 var owned_stations: Array[Station] = []
 
@@ -64,13 +71,32 @@ func add_station(station: Station) -> void:
 func select_station(station: Station) -> void:
 	selected_station = station
 
-## Total weekly salary obligation across every owned station's roster
+## Total weekly salary obligation across every owned station's roster,
+## discounted by HQ tier.
 func total_weekly_salaries() -> int:
 	var total: int = 0
 	for station in owned_stations:
 		for talent in station.roster:
 			total += talent.salary
-	return total
+	return int(total * salary_discount_multiplier())
+
+## Multiplier applied to acquisition costs - each HQ tier above 1 shaves
+## off a percentage.
+func acquisition_discount_multiplier() -> float:
+	return 1.0 - (float(hq_tier - 1) * HQ_ACQUISITION_DISCOUNT_PER_TIER)
+
+## Multiplier applied to weekly salaries - each HQ tier above 1 shaves off
+## a percentage.
+func salary_discount_multiplier() -> float:
+	return 1.0 - (float(hq_tier - 1) * HQ_SALARY_DISCOUNT_PER_TIER)
+
+## Flat bonus added to Market Research base accuracy per HQ tier above 1.
+func hq_research_accuracy_bonus() -> float:
+	return float(hq_tier - 1) * HQ_RESEARCH_ACCURACY_BONUS_PER_TIER
+
+## Cash cost to upgrade from the current tier to the next one.
+func hq_upgrade_cost() -> int:
+	return hq_tier * 5000
 
 ## Sum of listeners across every owned station, for the network-level top bar
 func total_network_listeners() -> int:
