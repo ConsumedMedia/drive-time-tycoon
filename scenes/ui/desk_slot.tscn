@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cqqfk1oyxoc01"]
+
+[ext_resource type="Texture2D" uid="uid://c51lu7v1d28bl" path="res://art/desks/desk_on_air.png" id="1_eskhe"]
+
+[node name="DeskSlot" type="Node2D" unique_id=583398555]
+
+[node name="Desk" type="Sprite2D" parent="." unique_id=1659488334]
+position = Vector2(582, 369)
+texture = ExtResource("1_eskhe")
+
+[node name="DaypartLabel" type="Label" parent="." unique_id=142447451]
+offset_left = 296.0
+offset_top = 434.0
+offset_right = 863.0
+offset_bottom = 544.0
+theme_override_colors/font_color = Color(0.23921569, 0.13725491, 0.0627451, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 0.2509804)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 80
+text = "MORNING"
+horizontal_alignment = 1
+vertical_alignment = 1
