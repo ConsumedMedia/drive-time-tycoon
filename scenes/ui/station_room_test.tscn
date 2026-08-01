@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://d286vjcmfh7p5"]
+
+[ext_resource type="Texture2D" uid="uid://dfshn515thx2g" path="res://art/station_room/station_room_bg.png" id="1_j803w"]
+[ext_resource type="PackedScene" uid="uid://okxutcl1jrcr" path="res://scenes/characters/character_sprite.tscn" id="2_8lfcs"]
+[ext_resource type="Texture2D" uid="uid://c51lu7v1d28bl" path="res://art/desks/desk_on_air.png" id="3_o4a01"]
+
+[node name="StationRoomTest" type="Node2D" unique_id=312345982]
+position = Vector2(-3, -3)
+
+[node name="Room" type="Sprite2D" parent="." unique_id=949346133]
+position = Vector2(575.5, 340.25)
+scale = Vector2(0.701555, 0.6562168)
+texture = ExtResource("1_j803w")
+
+[node name="CharacterSprite" parent="." unique_id=279569246 instance=ExtResource("2_8lfcs")]
+position = Vector2(587, 361)
+scale = Vector2(0.5, 0.5)
+
+[node name="Desk" type="Sprite2D" parent="." unique_id=588514187]
+position = Vector2(586, 471.00003)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_o4a01")

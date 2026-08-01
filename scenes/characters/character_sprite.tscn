@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://okxutcl1jrcr"]
+
+[ext_resource type="Script" uid="uid://87gf6bcgi54g" path="res://character_sprite.gd" id="1_g5gcv"]
+[ext_resource type="Texture2D" uid="uid://ilke6jdefwjn" path="res://art/characters/sprites/sprite_dave.png" id="2_2egrl"]
+
+[node name="CharacterSprite" type="Node2D" unique_id=279569246]
+script = ExtResource("1_g5gcv")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1945298792]
+texture = ExtResource("2_2egrl")
+
+[node name="BlinkOverlayRight" type="ColorRect" parent="." unique_id=1800791136]
+offset_left = 46.0
+offset_top = -130.0
+offset_right = 86.0
+offset_bottom = -83.0
+color = Color(1, 0.85882354, 0.7294118, 1)
+
+[node name="BlinkOverlayLeft" type="ColorRect" parent="." unique_id=1499781599]
+offset_left = -83.0
+offset_top = -131.0
+offset_right = -43.0
+offset_bottom = -84.0
+color = Color(1, 0.85882354, 0.7294118, 1)
