@@ -2,10 +2,25 @@
 
 [ext_resource type="Texture2D" uid="uid://dfshn515thx2g" path="res://art/station_room/station_room_bg.png" id="1_j803w"]
 [ext_resource type="PackedScene" uid="uid://okxutcl1jrcr" path="res://scenes/characters/character_sprite.tscn" id="2_8lfcs"]
+[ext_resource type="Texture2D" uid="uid://b4557wherfy6" path="res://art/station_room/station_room_sky.png" id="2_o4a01"]
 [ext_resource type="PackedScene" uid="uid://cqqfk1oyxoc01" path="res://scenes/ui/desk_slot.tscn" id="3_j803w"]
+[ext_resource type="Script" uid="uid://bpdg371478ef8" path="res://scenes/ui/sky_scroll.gd" id="4_8lfcs"]
 
 [node name="StationRoomTest" type="Node2D" unique_id=312345982]
 position = Vector2(-3, -3)
+
+[node name="SkyLayer" type="Node2D" parent="." unique_id=1203533545]
+script = ExtResource("4_8lfcs")
+
+[node name="SkyA" type="Sprite2D" parent="SkyLayer" unique_id=281713525]
+position = Vector2(554, 263)
+scale = Vector2(0.42504245, 0.29005525)
+texture = ExtResource("2_o4a01")
+
+[node name="SkyB" type="Sprite2D" parent="SkyLayer" unique_id=500333337]
+position = Vector2(554, 263)
+scale = Vector2(0.42504245, 0.29005525)
+texture = ExtResource("2_o4a01")
 
 [node name="Room" type="Sprite2D" parent="." unique_id=949346133]
 position = Vector2(575.5, 340.25)
