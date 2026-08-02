@@ -12,8 +12,8 @@ extends Node2D
 @export var blink_duration: float = 0.15
 
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var blink_overlay_left: ColorRect = $BlinkOverlayLeft
-@onready var blink_overlay_right: ColorRect = $BlinkOverlayRight
+@onready var blink_overlay_left: Control = $BlinkOverlayLeft
+@onready var blink_overlay_right: Control = $BlinkOverlayRight
 
 var _base_y: float
 var _time: float = 0.0
@@ -23,6 +23,35 @@ func _ready() -> void:
 	blink_overlay_left.visible = false
 	blink_overlay_right.visible = false
 	_schedule_next_blink()
+
+## Called by whatever instances this scene (e.g. station_view.gd) right
+## after add_child(), to set which character this is and where their eyes
+## sit - so one shared scene works for every Talent instead of needing a
+## duplicate scene per person.
+func configure(texture_path: String, left_eye_offset: Vector2, right_eye_offset: Vector2, eye_color: Color) -> void:
+	sprite.texture = load(texture_path)
+
+	var overlay_size := Vector2(40, 47)
+	blink_overlay_left.position = left_eye_offset
+	blink_overlay_left.size = overlay_size
+	blink_overlay_right.position = right_eye_offset
+	blink_overlay_right.size = overlay_size
+
+	_set_overlay_color(blink_overlay_left, eye_color)
+	_set_overlay_color(blink_overlay_right, eye_color)
+
+## Handles either node type for the overlays - a plain ColorRect (set
+## .color directly) or a Panel with a rounded StyleBoxFlat (duplicate its
+## existing style so we don't overwrite the corner radius you set by hand,
+## just the color).
+func _set_overlay_color(overlay: Control, eye_color: Color) -> void:
+	if overlay is ColorRect:
+		overlay.color = eye_color
+	elif overlay is Panel:
+		var base_style: StyleBox = overlay.get_theme_stylebox("panel")
+		var style: StyleBoxFlat = base_style.duplicate() as StyleBoxFlat
+		style.bg_color = eye_color
+		overlay.add_theme_stylebox_override("panel", style)
 
 func _process(delta: float) -> void:
 	_time += delta

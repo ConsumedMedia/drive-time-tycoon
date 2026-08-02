@@ -4,6 +4,9 @@
 
 [node name="DeskSlot" type="Node2D" unique_id=583398555]
 
+[node name="CharacterAnchor" type="Marker2D" parent="." unique_id=1087368109]
+position = Vector2(582, 150)
+
 [node name="Desk" type="Sprite2D" parent="." unique_id=1659488334]
 position = Vector2(582, 369)
 texture = ExtResource("1_eskhe")

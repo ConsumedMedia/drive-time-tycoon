@@ -22,6 +22,27 @@ class_name Talent
 ## Contract length remaining, in weeks (0 = no active contract / free agent)
 @export var contract_weeks_remaining: int = 0
 
+## Path to this Talent's flat/simple character sprite (the animated
+## on-air version, not the detailed portrait) for the Station View's
+## desk display. Falls back to Dave's sprite if unset - keeps existing
+## and newly-hired Talent from breaking while you're still assigning
+## sprites to the rest of the roster.
+@export_file("*.png") var sprite_path: String = "res://art/characters/sprites/sprite_dave.png"
+
+## Where this Talent's eyes sit on their sprite, as a LOCAL offset from
+## the Sprite2D's center (0,0) - used to position the blink overlay
+## correctly, since every character's face is a different generated
+## image with eyes in a different spot. Defaults match Dave's own
+## positions; every other character needs these set individually by
+## eyeballing it in the editor once.
+@export var blink_overlay_left_offset: Vector2 = Vector2(-83, -131)
+@export var blink_overlay_right_offset: Vector2 = Vector2(46, -130)
+
+## This Talent's skin tone, used to color the blink overlay so a closed
+## eye actually matches their skin rather than always showing Dave's.
+## Sample this directly from their sprite image once per character.
+@export var blink_overlay_color: Color = Color(1.0, 0.85882354, 0.7294118, 1.0)
+
 
 ## Direct listener swing this Talent contributes to their Daypart's week.
 ## Only Loose Cannon has a direct effect here - other traits work through

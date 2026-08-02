@@ -3,22 +3,31 @@
 [ext_resource type="Script" uid="uid://87gf6bcgi54g" path="res://character_sprite.gd" id="1_g5gcv"]
 [ext_resource type="Texture2D" uid="uid://ilke6jdefwjn" path="res://art/characters/sprites/sprite_dave.png" id="2_2egrl"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ftet1"]
+bg_color = Color(1, 0.75686276, 0.36862746, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [node name="CharacterSprite" type="Node2D" unique_id=279569246]
 script = ExtResource("1_g5gcv")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1945298792]
 texture = ExtResource("2_2egrl")
 
-[node name="BlinkOverlayRight" type="ColorRect" parent="." unique_id=1800791136]
-offset_left = 46.0
-offset_top = -130.0
-offset_right = 86.0
-offset_bottom = -83.0
-color = Color(1, 0.85882354, 0.7294118, 1)
+[node name="BlinkOverlayLeft" type="Panel" parent="." unique_id=905827006]
+offset_left = -116.99999
+offset_top = -220.0
+offset_right = -71.99999
+offset_bottom = -171.81818
+scale = Vector2(1.2, 1.1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_ftet1")
 
-[node name="BlinkOverlayLeft" type="ColorRect" parent="." unique_id=1499781599]
-offset_left = -83.0
-offset_top = -131.0
-offset_right = -43.0
-offset_bottom = -84.0
-color = Color(1, 0.85882354, 0.7294118, 1)
+[node name="BlinkOverlayRight" type="Panel" parent="." unique_id=153697334]
+offset_left = 0.9999999
+offset_top = -232.00002
+offset_right = 46.0
+offset_bottom = -183.81819
+scale = Vector2(1.2, 1.1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_ftet1")

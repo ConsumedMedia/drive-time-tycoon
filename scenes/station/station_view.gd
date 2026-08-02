@@ -1,8 +1,8 @@
 extends Control
 
 ## StationView - the drill-down from NetworkView. Shows one station's live
-## stats and, eventually, its animated Daypart interior. Bottom bar opens
-## overlay panels for station-level management.
+## stats and its animated Daypart interior. Bottom bar opens overlay panels
+## for station-level management.
 
 const PROMOTION_COST: int = 500
 const PROMOTION_HYPE_BOOST: float = 25.0
@@ -11,6 +11,14 @@ const HIRE_TALENT_PANEL := preload("res://scenes/ui/hire_talent_panel.tscn")
 const PRODUCE_SHOW_PANEL := preload("res://scenes/ui/produce_show_panel.tscn")
 const SPONSOR_PANEL := preload("res://scenes/ui/sponsor_panel.tscn")
 const STATION_ANALYTICS_PANEL := preload("res://scenes/ui/station_analytics_panel.tscn")
+const CHARACTER_SPRITE := preload("res://scenes/characters/character_sprite.tscn")
+
+const DEFAULT_ROOM_BACKGROUND := "res://art/station_room/station_room_bg.png"
+const CITY_ROOM_BACKGROUNDS := {
+	"Chill Coastal Village": "res://art/station_room/station_room_bg_chill_coastal_village.png",
+	"College Town": "res://art/station_room/station_room_bg_college_town.png",
+	"Retiree Coast": "res://art/station_room/station_room_bg_retiree_coast.png",
+}
 
 var station: Station
 var current_overlay: Control = null
@@ -42,17 +50,24 @@ func _ready() -> void:
 	%OverlayContainer.size = size
 	%OverlayContainer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-	_refresh_labels()
+	_refresh_room_background()
+	_refresh_display()
+
+func _refresh_room_background() -> void:
+	if station == null or station.city == null:
+		return
+	var bg_path: String = CITY_ROOM_BACKGROUNDS.get(station.city.city_name, DEFAULT_ROOM_BACKGROUND)
+	%Room.texture = load(bg_path)
 
 func _on_end_week_pressed() -> void:
 	WeeklyTick.run_weekly_tick()
-	_refresh_labels()
+	_refresh_display()
 
 func _on_run_promotion_pressed() -> void:
 	if station.cash >= PROMOTION_COST:
 		station.cash -= PROMOTION_COST
 		station.hype = min(100.0, station.hype + PROMOTION_HYPE_BOOST)
-	_refresh_labels()
+	_refresh_display()
 
 func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/main/main.tscn")
@@ -115,9 +130,9 @@ func _close_overlay() -> void:
 	if current_overlay != null:
 		current_overlay.queue_free()
 		current_overlay = null
-	_refresh_labels()
+	_refresh_display()
 
-func _refresh_labels() -> void:
+func _refresh_display() -> void:
 	if station == null:
 		%StationName.text = "No station selected"
 		return
@@ -127,3 +142,39 @@ func _refresh_labels() -> void:
 	%Hype.text = "Hype: " + str(int(station.hype))
 	%Loyalty.text = "Loyalty: " + str(int(station.loyalty))
 	%Cash.text = "Cash: $" + str(station.cash)
+
+	_refresh_desks()
+
+## Updates each of the 4 desk positions to show (or clear) the correct
+## host's sprite, based on whether that Daypart is actually staffed.
+## Matches by Daypart.slot value rather than array order, since dayparts
+## aren't guaranteed to be populated in a fixed order.
+func _refresh_desks() -> void:
+	for i in range(4):
+		var desk: Node2D = %DeskArea.get_child(i)
+		var daypart: Daypart = _find_daypart_for_slot(i)
+		_refresh_desk_character(desk, daypart)
+
+func _find_daypart_for_slot(slot: int) -> Daypart:
+	for daypart in station.dayparts:
+		if daypart.slot == slot:
+			return daypart
+	return null
+
+func _refresh_desk_character(desk: Node2D, daypart: Daypart) -> void:
+	var anchor: Marker2D = desk.get_node("CharacterAnchor")
+	var existing := anchor.get_node_or_null("HostCharacter")
+	if existing:
+		existing.free()
+
+	if daypart != null and daypart.is_staffed() and not daypart.show.hosts.is_empty():
+		var host: Talent = daypart.show.hosts[0]
+		var char_instance := CHARACTER_SPRITE.instantiate()
+		char_instance.name = "HostCharacter"
+		anchor.add_child(char_instance)
+		char_instance.configure(
+			host.sprite_path,
+			host.blink_overlay_left_offset,
+			host.blink_overlay_right_offset,
+			host.blink_overlay_color
+		)

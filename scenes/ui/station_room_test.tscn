@@ -5,6 +5,21 @@
 [ext_resource type="Texture2D" uid="uid://b4557wherfy6" path="res://art/station_room/station_room_sky.png" id="2_o4a01"]
 [ext_resource type="PackedScene" uid="uid://cqqfk1oyxoc01" path="res://scenes/ui/desk_slot.tscn" id="3_j803w"]
 [ext_resource type="Script" uid="uid://bpdg371478ef8" path="res://scenes/ui/sky_scroll.gd" id="4_8lfcs"]
+[ext_resource type="Texture2D" uid="uid://c0fq4hw4d387j" path="res://art/characters/sprites/sprite_dorothy.png" id="5_h12lv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h12lv"]
+bg_color = Color(1, 0.9647059, 0.8784314, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_djhin"]
+bg_color = Color(1, 0.9607843, 0.8862745, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="StationRoomTest" type="Node2D" unique_id=312345982]
 position = Vector2(-3, -3)
@@ -31,6 +46,23 @@ texture = ExtResource("1_j803w")
 position = Vector2(141, 363)
 scale = Vector2(0.4, 0.4)
 
+[node name="Sprite2D" parent="CharacterSprite" index="0" unique_id=1945298792]
+texture = ExtResource("5_h12lv")
+
+[node name="BlinkOverlayLeft" parent="CharacterSprite" index="1" unique_id=905827006]
+offset_left = -97.499985
+offset_top = -165.0
+offset_right = -52.499985
+offset_bottom = -116.81818
+theme_override_styles/panel = SubResource("StyleBoxFlat_h12lv")
+
+[node name="BlinkOverlayRight" parent="CharacterSprite" index="2" unique_id=153697334]
+offset_left = 30.000015
+offset_top = -187.49997
+offset_right = 75.000015
+offset_bottom = -139.31815
+theme_override_styles/panel = SubResource("StyleBoxFlat_djhin")
+
 [node name="DeskSlot" parent="." unique_id=583398555 instance=ExtResource("3_j803w")]
 position = Vector2(-89, 313)
 scale = Vector2(0.4, 0.4)
@@ -56,6 +88,7 @@ scale = Vector2(0.4, 0.4)
 [node name="DaypartLabel" parent="DeskSlot4" index="1" unique_id=142447451]
 text = "NIGHT"
 
+[editable path="CharacterSprite"]
 [editable path="DeskSlot2"]
 [editable path="DeskSlot3"]
 [editable path="DeskSlot4"]
