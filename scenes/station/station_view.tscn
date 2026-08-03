@@ -41,6 +41,9 @@ unique_name_in_owner = true
 position = Vector2(-86.00003, 357.99997)
 scale = Vector2(0.4, 0.4)
 
+[node name="CharacterAnchor" parent="Control/DeskArea/DeskSlot" index="0" unique_id=1087368109]
+scale = Vector2(0.7, 0.7)
+
 [node name="DeskSlot2" parent="Control/DeskArea" unique_id=959891772 instance=ExtResource("4_j0yv6")]
 position = Vector2(191, 358)
 scale = Vector2(0.4, 0.4)

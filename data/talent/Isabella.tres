@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Talent" format=3 uid="uid://51kyjdnjk01h"]
+
+[ext_resource type="Script" uid="uid://blkixtsdy4ysn" path="res://resources/talent.gd" id="1_8i54i"]
+
+[resource]
+script = ExtResource("1_8i54i")
+talent_name = "Isabella"
+personality_trait = "Rising Star"
+sprite_path = "uid://sed1h8d2n401"
+blink_overlay_left_offset = Vector2(-100, -200)
+blink_overlay_right_offset = Vector2(42.5, -240)
+blink_overlay_color = Color(1, 0.9254902, 0.76862746, 1)
+metadata/_custom_type_script = "uid://blkixtsdy4ysn"

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Talent" format=3 uid="uid://dxnjgt43fhxk8"]
+
+[ext_resource type="Script" uid="uid://blkixtsdy4ysn" path="res://resources/talent.gd" id="1_0gqt3"]
+
+[resource]
+script = ExtResource("1_0gqt3")
+talent_name = "Marcus"
+personality_trait = "Loose Cannon"
+sprite_path = "uid://cmfge1f2u5blf"
+blink_overlay_left_offset = Vector2(-147.5, -222.5)
+blink_overlay_right_offset = Vector2(-30, -265)
+blink_overlay_color = Color(0.8392157, 0.46666667, 0.15686275, 1)
+metadata/_custom_type_script = "uid://blkixtsdy4ysn"

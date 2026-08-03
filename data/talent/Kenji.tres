@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Talent" format=3 uid="uid://dvbj4q2yxa58u"]
+
+[ext_resource type="Script" uid="uid://blkixtsdy4ysn" path="res://resources/talent.gd" id="1_5m1ip"]
+
+[resource]
+script = ExtResource("1_5m1ip")
+talent_name = "Kenji"
+personality_trait = "Fan Favorite"
+sprite_path = "uid://ckmup6fxd300o"
+blink_overlay_left_offset = Vector2(-105, -217.5)
+blink_overlay_right_offset = Vector2(30, -237.5)
+blink_overlay_color = Color(1, 0.8509804, 0.5686275, 1)
+metadata/_custom_type_script = "uid://blkixtsdy4ysn"

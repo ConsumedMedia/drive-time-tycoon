@@ -5,17 +5,17 @@
 [ext_resource type="Texture2D" uid="uid://b4557wherfy6" path="res://art/station_room/station_room_sky.png" id="2_o4a01"]
 [ext_resource type="PackedScene" uid="uid://cqqfk1oyxoc01" path="res://scenes/ui/desk_slot.tscn" id="3_j803w"]
 [ext_resource type="Script" uid="uid://bpdg371478ef8" path="res://scenes/ui/sky_scroll.gd" id="4_8lfcs"]
-[ext_resource type="Texture2D" uid="uid://c0fq4hw4d387j" path="res://art/characters/sprites/sprite_dorothy.png" id="5_h12lv"]
+[ext_resource type="Texture2D" uid="uid://c0e1apudk2fog" path="res://art/characters/sprites/sprite_mei.png" id="5_h12lv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h12lv"]
-bg_color = Color(1, 0.9647059, 0.8784314, 1)
+bg_color = Color(0.84705883, 0.47058824, 0.14117648, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_djhin"]
-bg_color = Color(1, 0.9607843, 0.8862745, 1)
+bg_color = Color(0.9098039, 0.5686275, 0.2, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -50,17 +50,17 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("5_h12lv")
 
 [node name="BlinkOverlayLeft" parent="CharacterSprite" index="1" unique_id=905827006]
-offset_left = -97.499985
-offset_top = -165.0
-offset_right = -52.499985
-offset_bottom = -116.81818
+offset_left = -142.5
+offset_top = -125.0
+offset_right = -97.5
+offset_bottom = -76.81818
 theme_override_styles/panel = SubResource("StyleBoxFlat_h12lv")
 
 [node name="BlinkOverlayRight" parent="CharacterSprite" index="2" unique_id=153697334]
-offset_left = 30.000015
-offset_top = -187.49997
-offset_right = 75.000015
-offset_bottom = -139.31815
+offset_left = 2.5
+offset_top = -137.5
+offset_right = 47.5
+offset_bottom = -89.31818
 theme_override_styles/panel = SubResource("StyleBoxFlat_djhin")
 
 [node name="DeskSlot" parent="." unique_id=583398555 instance=ExtResource("3_j803w")]
@@ -71,21 +71,21 @@ scale = Vector2(0.4, 0.4)
 position = Vector2(190, 315)
 scale = Vector2(0.4, 0.4)
 
-[node name="DaypartLabel" parent="DeskSlot2" index="1" unique_id=142447451]
+[node name="DaypartLabel" parent="DeskSlot2" index="2" unique_id=142447451]
 text = "MIDDAY"
 
 [node name="DeskSlot3" parent="." unique_id=1350884727 instance=ExtResource("3_j803w")]
 position = Vector2(478.99997, 316)
 scale = Vector2(0.4, 0.4)
 
-[node name="DaypartLabel" parent="DeskSlot3" index="1" unique_id=142447451]
+[node name="DaypartLabel" parent="DeskSlot3" index="2" unique_id=142447451]
 text = "AFTERNOON"
 
 [node name="DeskSlot4" parent="." unique_id=1429652838 instance=ExtResource("3_j803w")]
 position = Vector2(764, 317)
 scale = Vector2(0.4, 0.4)
 
-[node name="DaypartLabel" parent="DeskSlot4" index="1" unique_id=142447451]
+[node name="DaypartLabel" parent="DeskSlot4" index="2" unique_id=142447451]
 text = "NIGHT"
 
 [editable path="CharacterSprite"]

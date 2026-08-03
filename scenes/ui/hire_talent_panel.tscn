@@ -15,6 +15,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="TraitFilterOption" type="OptionButton" parent="VBoxContainer" unique_id=1330616872]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="CandidateOption" type="OptionButton" parent="VBoxContainer" unique_id=1755889403]
 unique_name_in_owner = true
 layout_mode = 2

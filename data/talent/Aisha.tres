@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Talent" format=3 uid="uid://cyjk3ddm4doua"]
+
+[ext_resource type="Script" uid="uid://blkixtsdy4ysn" path="res://resources/talent.gd" id="1_hyjnk"]
+
+[resource]
+script = ExtResource("1_hyjnk")
+talent_name = "Aisha"
+personality_trait = "Fan Favorite"
+sprite_path = "uid://uq08oxbr41s"
+blink_overlay_left_offset = Vector2(-105, -197.5)
+blink_overlay_right_offset = Vector2(22.5, -222.5)
+blink_overlay_color = Color(0.84705883, 0.47058824, 0.14117648, 1)
+metadata/_custom_type_script = "uid://blkixtsdy4ysn"

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Talent" format=3 uid="uid://bmgf275itejgf"]
+
+[ext_resource type="Script" uid="uid://blkixtsdy4ysn" path="res://resources/talent.gd" id="1_xn4ao"]
+
+[resource]
+script = ExtResource("1_xn4ao")
+talent_name = "Mei"
+personality_trait = "Smooth Operator"
+sprite_path = "uid://c0e1apudk2fog"
+blink_overlay_left_offset = Vector2(-142.5, -125)
+blink_overlay_right_offset = Vector2(2.5, -137.5)
+metadata/_custom_type_script = "uid://blkixtsdy4ysn"

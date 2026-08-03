@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Talent" format=3 uid="uid://pkqb34w4u2n4"]
+
+[ext_resource type="Script" uid="uid://blkixtsdy4ysn" path="res://resources/talent.gd" id="1_xoqeq"]
+
+[resource]
+script = ExtResource("1_xoqeq")
+talent_name = "Frank"
+sprite_path = "uid://cokg8xtls2h8x"
+blink_overlay_left_offset = Vector2(-95, -160)
+blink_overlay_right_offset = Vector2(35, -160)
+blink_overlay_color = Color(1, 0.8352941, 0.6862745, 1)
+metadata/_custom_type_script = "uid://blkixtsdy4ysn"

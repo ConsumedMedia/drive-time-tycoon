@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Talent" format=3 uid="uid://bqfkcn13kws8m"]
+
+[ext_resource type="Script" uid="uid://blkixtsdy4ysn" path="res://resources/talent.gd" id="1_ewa8v"]
+
+[resource]
+script = ExtResource("1_ewa8v")
+talent_name = "Reggie"
+personality_trait = "Smooth Operator"
+sprite_path = "uid://efs5kpxskmo"
+blink_overlay_left_offset = Vector2(-117.5, -170)
+blink_overlay_right_offset = Vector2(45, -190)
+blink_overlay_color = Color(0.74509805, 0.44313726, 0.21176471, 1)
+metadata/_custom_type_script = "uid://blkixtsdy4ysn"

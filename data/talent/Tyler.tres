@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Talent" format=3 uid="uid://c08yvdg80a66l"]
+
+[ext_resource type="Script" uid="uid://blkixtsdy4ysn" path="res://resources/talent.gd" id="1_cpwc5"]
+
+[resource]
+script = ExtResource("1_cpwc5")
+talent_name = "Tyler"
+personality_trait = "Rising Star"
+sprite_path = "uid://deaynebkn0b2p"
+blink_overlay_left_offset = Vector2(-110, -197.5)
+blink_overlay_right_offset = Vector2(2.5, -227.5)
+blink_overlay_color = Color(1, 0.8745098, 0.6, 1)
+metadata/_custom_type_script = "uid://blkixtsdy4ysn"
