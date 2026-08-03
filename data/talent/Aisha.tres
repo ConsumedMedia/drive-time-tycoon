@@ -6,6 +6,8 @@
 script = ExtResource("1_hyjnk")
 talent_name = "Aisha"
 personality_trait = "Fan Favorite"
+skill = 8
+salary = 340
 sprite_path = "uid://uq08oxbr41s"
 blink_overlay_left_offset = Vector2(-105, -197.5)
 blink_overlay_right_offset = Vector2(22.5, -222.5)

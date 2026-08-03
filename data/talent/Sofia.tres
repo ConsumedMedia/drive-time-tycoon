@@ -6,6 +6,7 @@
 script = ExtResource("1_0lnv7")
 talent_name = "Sofia"
 personality_trait = "Rising Star"
+salary = 120
 sprite_path = "uid://bppoae37fv1cr"
 blink_overlay_left_offset = Vector2(-102.5, -190)
 blink_overlay_right_offset = Vector2(25, -217.5)

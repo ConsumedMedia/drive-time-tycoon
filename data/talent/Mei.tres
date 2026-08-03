@@ -6,7 +6,10 @@
 script = ExtResource("1_xn4ao")
 talent_name = "Mei"
 personality_trait = "Smooth Operator"
+skill = 10
+salary = 450
 sprite_path = "uid://c0e1apudk2fog"
 blink_overlay_left_offset = Vector2(-142.5, -125)
 blink_overlay_right_offset = Vector2(2.5, -137.5)
+blink_overlay_color = Color(1, 0.9019608, 0.7294118, 1)
 metadata/_custom_type_script = "uid://blkixtsdy4ysn"

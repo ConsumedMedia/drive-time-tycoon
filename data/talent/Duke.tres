@@ -6,6 +6,7 @@
 script = ExtResource("1_wcsyh")
 talent_name = "Duke"
 personality_trait = "Loose Cannon"
+salary = 150
 sprite_path = "uid://bxhudagymh1p4"
 blink_overlay_left_offset = Vector2(-115, -240)
 blink_overlay_right_offset = Vector2(-17.5, -272.5)

@@ -6,6 +6,8 @@
 script = ExtResource("1_ahjsc")
 talent_name = "Vivian"
 personality_trait = "Smooth Operator"
+skill = 8
+salary = 360
 sprite_path = "uid://nrmk7kswrteh"
 blink_overlay_left_offset = Vector2(-120, -167.5)
 blink_overlay_right_offset = Vector2(20, -192.5)
