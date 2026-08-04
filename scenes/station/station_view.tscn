@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cx844sr5seoes"]
 
+[ext_resource type="Theme" uid="uid://1k54a3f34jgn" path="res://art/fonts/station_theme.tres" id="1_14cvo"]
 [ext_resource type="Script" uid="uid://b7jy5squknicf" path="res://scenes/station/station_view.gd" id="1_i2y0b"]
 [ext_resource type="Script" uid="uid://bpdg371478ef8" path="res://scenes/ui/sky_scroll.gd" id="2_b50if"]
 [ext_resource type="Texture2D" uid="uid://b4557wherfy6" path="res://art/station_room/station_room_sky.png" id="3_chcmp"]
@@ -15,6 +16,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("1_14cvo")
 script = ExtResource("1_i2y0b")
 
 [node name="SkyLayer" type="Node2D" parent="Control" unique_id=1655671659]

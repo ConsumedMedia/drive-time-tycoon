@@ -1,0 +1,6 @@
+[gd_resource type="Theme" format=3 uid="uid://1k54a3f34jgn"]
+
+[ext_resource type="FontFile" uid="uid://bbya0tmtdfxb3" path="res://art/fonts/Righteous-Regular.ttf" id="1_purg3"]
+
+[resource]
+default_font = ExtResource("1_purg3")
