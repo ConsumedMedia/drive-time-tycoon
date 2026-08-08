@@ -6,8 +6,121 @@
 [ext_resource type="Texture2D" uid="uid://b4557wherfy6" path="res://art/station_room/station_room_sky.png" id="3_chcmp"]
 [ext_resource type="PackedScene" uid="uid://cqqfk1oyxoc01" path="res://scenes/ui/desk_slot.tscn" id="4_j0yv6"]
 [ext_resource type="Texture2D" uid="uid://dfshn515thx2g" path="res://art/station_room/station_room_bg.png" id="4_l5w6l"]
+[ext_resource type="Texture2D" uid="uid://cgb7sng2g5xa0" path="res://art/ui/icon_end_week.png" id="7_apr1o"]
+[ext_resource type="Script" uid="uid://bfcjfpyrsn7kr" path="res://scenes/station/button_icon_hover.gd" id="8_jpvvi"]
+[ext_resource type="Texture2D" uid="uid://bsnd24tbmogxy" path="res://art/ui/icon_run_promotion.png" id="8_ottyf"]
+[ext_resource type="Texture2D" uid="uid://6ut87ii27qio" path="res://art/ui/icon_hire_talent.png" id="9_2jjki"]
+[ext_resource type="Texture2D" uid="uid://ddhesrhkl2g46" path="res://art/ui/icon_back.png" id="9_7gqwp"]
+[ext_resource type="Texture2D" uid="uid://bft5xg50ayb41" path="res://art/ui/icon_produce_show.png" id="10_x1yht"]
+[ext_resource type="Texture2D" uid="uid://ciq5dvdijlvy7" path="res://art/ui/icon_sponsors.png" id="11_1xtrk"]
+[ext_resource type="Texture2D" uid="uid://d4kwwcvwib63l" path="res://art/ui/icon_station_analytics.png" id="12_s4one"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_nyl0h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4mpt6"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iuonh"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hyk8p"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k2fmo"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l3cfh"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_apr1o"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ottyf"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2jjki"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x1yht"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1xtrk"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06ubu"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2tsl1"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f8daw"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lbw1q"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rsxqw"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dgssr"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8shkw"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jpvvi"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7gqwp"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s4one"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6b558"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qt1s8"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvmk3"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f1mk4"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_anri6"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rohcw"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_whltq"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4cgjw"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qqcu4"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qvxwj"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_epon0"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rur63"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3bvyh"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_csoij"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_erqj8"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="StationView" type="Node2D" unique_id=1549030094]
 
@@ -38,6 +151,7 @@ texture = ExtResource("4_l5w6l")
 
 [node name="DeskArea" type="Node2D" parent="Control" unique_id=1502483845]
 unique_name_in_owner = true
+position = Vector2(5, -48)
 
 [node name="DeskSlot" parent="Control/DeskArea" unique_id=583398555 instance=ExtResource("4_j0yv6")]
 position = Vector2(-86.00003, 357.99997)
@@ -67,82 +181,162 @@ scale = Vector2(0.4, 0.4)
 [node name="DaypartLabel" parent="Control/DeskArea/DeskSlot4" index="2" unique_id=142447451]
 text = "NIGHT"
 
-[node name="VBoxContainer" type="HBoxContainer" parent="Control" unique_id=87167774]
-layout_mode = 0
-offset_left = 5.0
-offset_top = -92.0
-offset_right = 1162.0
-offset_bottom = 179.0
+[node name="OverlayContainer" type="Control" parent="Control" unique_id=1861014457]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="StationName" type="Label" parent="Control/VBoxContainer" unique_id=446202592]
+[node name="TopStatsBar" type="HBoxContainer" parent="Control" unique_id=1918572881]
+layout_mode = 0
+offset_right = 395.0
+offset_bottom = 60.0
+
+[node name="StationName" type="Label" parent="Control/TopStatsBar" unique_id=1845040759]
 unique_name_in_owner = true
 layout_mode = 2
 text = "station name"
 
-[node name="Listeners" type="Label" parent="Control/VBoxContainer" unique_id=1363436980]
+[node name="Listeners" type="Label" parent="Control/TopStatsBar" unique_id=650982424]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Listeners: 0"
 label_settings = SubResource("LabelSettings_nyl0h")
 
-[node name="Hype" type="Label" parent="Control/VBoxContainer" unique_id=1258373239]
+[node name="Hype" type="Label" parent="Control/TopStatsBar" unique_id=698570681]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Hype: 0"
 
-[node name="Loyalty" type="Label" parent="Control/VBoxContainer" unique_id=1113408194]
+[node name="Loyalty" type="Label" parent="Control/TopStatsBar" unique_id=1805819718]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Loyalty: 0"
 
-[node name="Cash" type="Label" parent="Control/VBoxContainer" unique_id=19830994]
+[node name="Cash" type="Label" parent="Control/TopStatsBar" unique_id=758189617]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Cash: 0"
 
-[node name="EndWeek" type="Button" parent="Control/VBoxContainer" unique_id=907426734]
+[node name="ButtonBar" type="HBoxContainer" parent="Control" unique_id=106793929]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 544.0
+offset_right = 1150.0
+offset_bottom = 652.0
+alignment = 1
+
+[node name="EndWeek" type="Button" parent="Control/ButtonBar" unique_id=217145016]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/icon_max_width = 100
+theme_override_constants/align_to_largest_stylebox = 0
+theme_override_constants/line_spacing = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_4mpt6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_iuonh")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hyk8p")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_k2fmo")
+theme_override_styles/focus = SubResource("StyleBoxFlat_l3cfh")
+icon = ExtResource("7_apr1o")
+script = ExtResource("8_jpvvi")
+hint_text = "Advance time by one week across your entire network. Every station's listeners, hype, and loyalty shift based on how well your Shows are performing, sponsors get paid out (or start losing patience), salaries get deducted, and random events might shake things up."
+tooltip_font_size = 12
+tooltip_background_color = Color(0.08627451, 0.08627451, 0.08627451, 0.8666667)
+tooltip_padding = 15.0
+
+[node name="RunPromotion" type="Button" parent="Control/ButtonBar" unique_id=2120540189]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+theme_override_constants/icon_max_width = 100
+theme_override_styles/normal = SubResource("StyleBoxFlat_apr1o")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ottyf")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2jjki")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_x1yht")
+theme_override_styles/focus = SubResource("StyleBoxFlat_1xtrk")
+icon = ExtResource("8_ottyf")
+script = ExtResource("8_jpvvi")
+hint_text = "Spend $500 from this station's cash to give its Hype an instant boost. A quick way to jolt a sagging station back to life or capitalize on momentum before it fades. Hype decays every week on its own, so promotions work best as a periodic top-up rather than a one-time fix."
+tooltip_font_size = 12
+tooltip_padding = 15.0
+
+[node name="BackButton" type="Button" parent="Control/ButtonBar" unique_id=2043647069]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+theme_override_constants/icon_max_width = 100
+theme_override_styles/normal = SubResource("StyleBoxFlat_06ubu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2tsl1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f8daw")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_lbw1q")
+theme_override_styles/focus = SubResource("StyleBoxFlat_rsxqw")
+icon = ExtResource("9_7gqwp")
+script = ExtResource("8_jpvvi")
+hint_text = "Return to the Network View, where you can see all your owned stations at a glance and access network-wide tools."
+tooltip_font_size = 12
+tooltip_padding = 15.0
+
+[node name="HireTalentButton" type="Button" parent="Control/ButtonBar" unique_id=1040105529]
 unique_name_in_owner = true
 layout_mode = 2
-text = "End Week"
+theme_override_constants/icon_max_width = 80
+theme_override_styles/normal = SubResource("StyleBoxFlat_dgssr")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8shkw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jpvvi")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_7gqwp")
+theme_override_styles/focus = SubResource("StyleBoxFlat_s4one")
+icon = ExtResource("9_2jjki")
+script = ExtResource("8_jpvvi")
+hint_text = "Bring a new host onto this station's roster from your pool of available candidates. Filter by personality trait, since each one affects your station differently, from fame growth speed to how much chaos they bring to the air. Hired Talent draw a weekly salary, so choose based on what this station can actually afford."
+tooltip_font_size = 12
+tooltip_padding = 15.0
 
-[node name="RunPromotion" type="Button" parent="Control/VBoxContainer" unique_id=1249840406]
+[node name="ProduceShowButton" type="Button" parent="Control/ButtonBar" unique_id=1192606017]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Run Promotion ($500)"
+theme_override_constants/icon_max_width = 80
+theme_override_styles/normal = SubResource("StyleBoxFlat_6b558")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qt1s8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_uvmk3")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_f1mk4")
+theme_override_styles/focus = SubResource("StyleBoxFlat_anri6")
+icon = ExtResource("10_x1yht")
+script = ExtResource("8_jpvvi")
+hint_text = "Create new programming for one of this station's Daypart slots using a host from your roster and a production budget.  More money and higher skill hosts mean better quality. You can also syndicate an existing Show from another station in your network here, or retire an aging Show to the back catalog for ongoing passive income. This is where your station's actual content gets made."
+tooltip_font_size = 12
+tooltip_padding = 15.0
 
-[node name="BackButton" type="Button" parent="Control/VBoxContainer" unique_id=1995049911]
+[node name="SponsorsButton" type="Button" parent="Control/ButtonBar" unique_id=1270543722]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Back"
+theme_override_constants/icon_max_width = 80
+theme_override_styles/normal = SubResource("StyleBoxFlat_rohcw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_whltq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4cgjw")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_qqcu4")
+theme_override_styles/focus = SubResource("StyleBoxFlat_qvxwj")
+icon = ExtResource("11_1xtrk")
+script = ExtResource("8_jpvvi")
+hint_text = "Manage this station's advertisers. See who's currently on board, how satisfied they are, and what daypart they want filled. Court new sponsors from the available pool to add more weekly income. Keep their demanded slot staffed with a quality Show, or they'll lose patience and eventually walk."
+tooltip_font_size = 12
+tooltip_padding = 15.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer" unique_id=1043915859]
-layout_mode = 2
-
-[node name="HireTalentButton" type="Button" parent="Control/VBoxContainer/HBoxContainer" unique_id=818226492]
+[node name="StationAnalyticsButton" type="Button" parent="Control/ButtonBar" unique_id=1000016733]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Hire Talent"
-
-[node name="ProduceShowButton" type="Button" parent="Control/VBoxContainer/HBoxContainer" unique_id=1043050261]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Produce Show"
-
-[node name="SponsorsButton" type="Button" parent="Control/VBoxContainer/HBoxContainer" unique_id=237958385]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Sponsors"
-
-[node name="StationAnalyticsButton" type="Button" parent="Control/VBoxContainer/HBoxContainer" unique_id=1879139278]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Station Analytics"
-
-[node name="OverlayContainer" type="Control" parent="Control" unique_id=684025231]
-unique_name_in_owner = true
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+theme_override_constants/icon_max_width = 80
+theme_override_styles/normal = SubResource("StyleBoxFlat_epon0")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rur63")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3bvyh")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_csoij")
+theme_override_styles/focus = SubResource("StyleBoxFlat_erqj8")
+icon = ExtResource("12_s4one")
+script = ExtResource("8_jpvvi")
+hint_text = "Pull up a full breakdown of this station's stats, its four Dayparts and whatever's airing in each, your current roster, active sponsors, and any recent events that have happened here. The best place to check in on how a station is actually doing before deciding what to do next."
+tooltip_font_size = 12
+tooltip_padding = 15.0
 
 [editable path="Control/DeskArea/DeskSlot"]
 [editable path="Control/DeskArea/DeskSlot2"]

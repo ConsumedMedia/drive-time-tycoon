@@ -12,6 +12,19 @@ offset_bottom = 40.0
 script = ExtResource("2_iuonh")
 candidate_talent_paths = Array[String](["res://data/talent/Dave.tres", "res://data/talent/Dorothy.tres", "res://data/talent/Frank.tres", "res://data/talent/Barbara.tres", "res://data/talent/Sofia.tres", "res://data/talent/Tyler.tres", "res://data/talent/Connor.tres", "res://data/talent/Isabella.tres", "res://data/talent/Marcus.tres", "res://data/talent/Kelsey.tres", "res://data/talent/Duke.tres", "res://data/talent/Jasmine.tres", "res://data/talent/Aisha.tres", "res://data/talent/Kenji.tres", "res://data/talent/Claire.tres", "res://data/talent/Nathan.tres", "res://data/talent/Reggie.tres", "res://data/talent/Vivian.tres", "res://data/talent/Antonio.tres", "res://data/talent/Mei.tres"])
 
+[node name="OverlayContainer" type="Control" parent="NetworkOverview" unique_id=315071924]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 74.0
+offset_right = 5.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="VBoxContainer" type="VBoxContainer" parent="NetworkOverview" unique_id=96521990]
 layout_mode = 0
 offset_right = 40.0
@@ -76,12 +89,3 @@ text = "Network Analytics"
 unique_name_in_owner = true
 layout_mode = 2
 text = "HQ"
-
-[node name="OverlayContainer" type="Control" parent="NetworkOverview" unique_id=315071924]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
