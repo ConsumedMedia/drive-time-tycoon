@@ -131,8 +131,6 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [node name="Control" type="Control" parent="." unique_id=1021174228]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 theme = ExtResource("1_14cvo")
 script = ExtResource("1_i2y0b")
 
@@ -140,16 +138,23 @@ script = ExtResource("1_i2y0b")
 position = Vector2(377.00003, 219)
 scale = Vector2(0.3, 0.3)
 script = ExtResource("2_b50if")
+sky_width_override = 2172.0
 
 [node name="SkyA" type="Sprite2D" parent="Control/SkyLayer" unique_id=1458302083]
+position = Vector2(-126.66676, 0)
 texture = ExtResource("3_chcmp")
 
 [node name="SkyB" type="Sprite2D" parent="Control/SkyLayer" unique_id=1389902147]
+position = Vector2(810, 0)
+texture = ExtResource("3_chcmp")
+
+[node name="SkyC" type="Sprite2D" parent="Control/SkyLayer" unique_id=124700795]
+position = Vector2(960, 0)
 texture = ExtResource("3_chcmp")
 
 [node name="Room" type="Sprite2D" parent="Control" unique_id=273047272]
 unique_name_in_owner = true
-position = Vector2(575.00006, 325)
+position = Vector2(575, 328)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("4_l5w6l")
 
