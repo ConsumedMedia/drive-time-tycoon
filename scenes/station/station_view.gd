@@ -138,10 +138,15 @@ func _refresh_display() -> void:
 		return
 
 	%StationName.text = station.station_name
-	%Listeners.text = "Listeners: " + str(station.listeners)
-	%Hype.text = "Hype: " + str(int(station.hype))
-	%Loyalty.text = "Loyalty: " + str(int(station.loyalty))
-	%Cash.text = "Cash: $" + str(station.cash)
+	%StationNameIcon.hint_text = "%s | %s format | %s" % [
+		station.city.city_name,
+		station.format.format_name,
+		station.city.vibe_description
+	]
+	%Listeners.text = str(station.listeners)
+	%Hype.text = str(int(station.hype))
+	%Loyalty.text = str(int(station.loyalty))
+	%Cash.text = "$" + str(station.cash)
 
 	_refresh_desks()
 

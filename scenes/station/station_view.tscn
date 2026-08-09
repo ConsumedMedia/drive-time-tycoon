@@ -6,16 +6,20 @@
 [ext_resource type="Texture2D" uid="uid://b4557wherfy6" path="res://art/station_room/station_room_sky.png" id="3_chcmp"]
 [ext_resource type="PackedScene" uid="uid://cqqfk1oyxoc01" path="res://scenes/ui/desk_slot.tscn" id="4_j0yv6"]
 [ext_resource type="Texture2D" uid="uid://dfshn515thx2g" path="res://art/station_room/station_room_bg.png" id="4_l5w6l"]
+[ext_resource type="Texture2D" uid="uid://b28u517fd4b3" path="res://art/ui/icon_station_name.png" id="7_6b558"]
 [ext_resource type="Texture2D" uid="uid://cgb7sng2g5xa0" path="res://art/ui/icon_end_week.png" id="7_apr1o"]
+[ext_resource type="Texture2D" uid="uid://b3xhyb28nw0t" path="res://art/ui/icon_listeners.png" id="7_dgssr"]
+[ext_resource type="Script" uid="uid://b7reyr4epsrek" path="res://scenes/station/stat_icon_hover.gd" id="8_6b558"]
 [ext_resource type="Script" uid="uid://bfcjfpyrsn7kr" path="res://scenes/station/button_icon_hover.gd" id="8_jpvvi"]
 [ext_resource type="Texture2D" uid="uid://bsnd24tbmogxy" path="res://art/ui/icon_run_promotion.png" id="8_ottyf"]
 [ext_resource type="Texture2D" uid="uid://6ut87ii27qio" path="res://art/ui/icon_hire_talent.png" id="9_2jjki"]
 [ext_resource type="Texture2D" uid="uid://ddhesrhkl2g46" path="res://art/ui/icon_back.png" id="9_7gqwp"]
+[ext_resource type="Texture2D" uid="uid://c1vvqkm6k3l0k" path="res://art/ui/icon_hype.png" id="10_f1mk4"]
 [ext_resource type="Texture2D" uid="uid://bft5xg50ayb41" path="res://art/ui/icon_produce_show.png" id="10_x1yht"]
 [ext_resource type="Texture2D" uid="uid://ciq5dvdijlvy7" path="res://art/ui/icon_sponsors.png" id="11_1xtrk"]
+[ext_resource type="Texture2D" uid="uid://ddrukuoirh10r" path="res://art/ui/icon_loyalty.png" id="11_anri6"]
+[ext_resource type="Texture2D" uid="uid://darieb0c87833" path="res://art/ui/icon_cash.png" id="12_rohcw"]
 [ext_resource type="Texture2D" uid="uid://d4kwwcvwib63l" path="res://art/ui/icon_station_analytics.png" id="12_s4one"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_nyl0h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4mpt6"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -192,31 +196,107 @@ layout_mode = 0
 offset_right = 395.0
 offset_bottom = 60.0
 
-[node name="StationName" type="Label" parent="Control/TopStatsBar" unique_id=1845040759]
+[node name="StationNameIcon" type="TextureRect" parent="Control/TopStatsBar" unique_id=2050794080]
 unique_name_in_owner = true
 layout_mode = 2
-text = "station name"
+texture = ExtResource("7_6b558")
+expand_mode = 3
+script = ExtResource("8_6b558")
+tooltip_font_size = 12
+tooltip_padding = 15.0
 
-[node name="Listeners" type="Label" parent="Control/TopStatsBar" unique_id=650982424]
+[node name="StationName" type="Label" parent="Control/TopStatsBar/StationNameIcon" unique_id=1167125923]
 unique_name_in_owner = true
-layout_mode = 2
-text = "Listeners: 0"
-label_settings = SubResource("LabelSettings_nyl0h")
+layout_mode = 0
+offset_left = 9.0
+offset_top = 36.0
+offset_right = 49.0
+offset_bottom = 57.0
+theme_override_colors/font_color = Color(0.2, 0.18039216, 0.15294118, 1)
+theme_override_font_sizes/font_size = 14
+text = "0"
+horizontal_alignment = 1
 
-[node name="Hype" type="Label" parent="Control/TopStatsBar" unique_id=698570681]
-unique_name_in_owner = true
+[node name="IconListeners" type="TextureRect" parent="Control/TopStatsBar" unique_id=1774918803]
 layout_mode = 2
-text = "Hype: 0"
+texture = ExtResource("7_dgssr")
+expand_mode = 3
+script = ExtResource("8_6b558")
+hint_text = "How many people are tuning in each week. Listeners grow when your Hype and Show quality are high, and shrink when Dayparts sit empty or your content falls flat."
+tooltip_font_size = 12
+tooltip_padding = 15.0
 
-[node name="Loyalty" type="Label" parent="Control/TopStatsBar" unique_id=1805819718]
+[node name="Listeners" type="Label" parent="Control/TopStatsBar/IconListeners" unique_id=1113625445]
 unique_name_in_owner = true
-layout_mode = 2
-text = "Loyalty: 0"
+layout_mode = 0
+offset_left = 9.0
+offset_top = 34.0
+offset_right = 49.0
+offset_bottom = 55.0
+theme_override_colors/font_color = Color(0.2, 0.18039216, 0.15294118, 1)
+text = "0"
+horizontal_alignment = 1
 
-[node name="Cash" type="Label" parent="Control/TopStatsBar" unique_id=758189617]
-unique_name_in_owner = true
+[node name="IconHype" type="TextureRect" parent="Control/TopStatsBar" unique_id=1309470312]
 layout_mode = 2
-text = "Cash: 0"
+texture = ExtResource("10_f1mk4")
+expand_mode = 3
+script = ExtResource("8_6b558")
+hint_text = "How much buzz your station has right now. Hype decays a little every week on its own, but Run Promotion, Viral Clip events, and high quality Shows all push it back up."
+tooltip_font_size = 12
+tooltip_padding = 15.0
+
+[node name="Hype" type="Label" parent="Control/TopStatsBar/IconHype" unique_id=703393345]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 34.0
+offset_right = 48.0
+offset_bottom = 55.0
+theme_override_colors/font_color = Color(0.2, 0.18039216, 0.15686275, 1)
+text = "0"
+horizontal_alignment = 1
+
+[node name="IconLoyalty" type="TextureRect" parent="Control/TopStatsBar" unique_id=920063245]
+layout_mode = 2
+texture = ExtResource("11_anri6")
+expand_mode = 3
+script = ExtResource("8_6b558")
+hint_text = "How attached your listeners are to this station specifically. Higher Loyalty means listeners stick around even through a rough week, and it directly boosts how much your Hype and Show quality translate into real listener growth."
+tooltip_font_size = 12
+tooltip_padding = 15.0
+
+[node name="Loyalty" type="Label" parent="Control/TopStatsBar/IconLoyalty" unique_id=143937855]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 9.0
+offset_top = 34.0
+offset_right = 49.0
+offset_bottom = 55.0
+theme_override_colors/font_color = Color(0.2, 0.18039216, 0.15294118, 1)
+text = "0"
+horizontal_alignment = 1
+
+[node name="IconCash" type="TextureRect" parent="Control/TopStatsBar" unique_id=1502087925]
+layout_mode = 2
+texture = ExtResource("12_rohcw")
+expand_mode = 3
+script = ExtResource("8_6b558")
+hint_text = "This station's own cash on hand, separate from your network-wide budget. Sponsor payouts add to it; Run Promotion and future spending pull from it."
+tooltip_font_size = 12
+tooltip_padding = 15.0
+
+[node name="Cash" type="Label" parent="Control/TopStatsBar/IconCash" unique_id=1197292773]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 7.0
+offset_top = 34.0
+offset_right = 47.0
+offset_bottom = 55.0
+theme_override_colors/font_color = Color(0.2, 0.18039216, 0.15294118, 1)
+theme_override_font_sizes/font_size = 14
+text = "0"
+horizontal_alignment = 1
 
 [node name="ButtonBar" type="HBoxContainer" parent="Control" unique_id=106793929]
 layout_mode = 0

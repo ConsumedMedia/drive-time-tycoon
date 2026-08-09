@@ -1,18 +1,19 @@
-extends Button
+extends TextureRect
 
-## Icon + hover tint + click dim + a custom tooltip positioned above this
-## specific button. Uses its OWN hint_text field rather than the built-in
-## Tooltip Text property - Godot's native tooltip system only activates
-## when Tooltip Text is non-empty, so keeping that blank and storing our
-## text separately means there's no native tooltip left to suppress or
-## fight with (a stray border/frame from the empty suppressed tooltip
-## was the cause of the small line artifact near the cursor).
+## Hover behavior for top-bar stat icons (Station Name, Listeners, Hype,
+## Cash, Loyalty). Not a button - these aren't clickable, just displays -
+## so no click-dim effect, just hover detection and a tooltip. The
+## tooltip drops BELOW the icon instead of above, since these sit at the
+## top of the screen and there's nowhere for it to go but down.
+##
+## The live-updating number itself is a separate child Label positioned
+## in the blank space baked into each icon's art - this script doesn't
+## touch that Label's text at all, station_view.gd keeps setting it
+## directly via the same %Listeners / %Hype / %Cash / %Loyalty unique
+## names it already used before this rebuild.
 
 @export_multiline var hint_text: String = ""
-@export var hover_tint: Color = Color(1.25, 1.15, 0.9, 1.0)
-@export var click_opacity: float = 0.75
-@export var tween_duration: float = 0.1
-@export var tooltip_gap_above: float = 10.0
+@export var tooltip_gap_below: float = 10.0
 @export var tooltip_font_size: int = 16
 @export var tooltip_background_color: Color = Color(0.1, 0.1, 0.1, 0.85)
 @export var tooltip_padding: float = 12.0
@@ -22,26 +23,12 @@ var _tooltip: PanelContainer = null
 func _ready() -> void:
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
-	button_down.connect(_on_button_down)
-	button_up.connect(_on_button_up)
 
 func _on_mouse_entered() -> void:
-	var tween := create_tween()
-	tween.tween_property(self, "modulate", hover_tint, tween_duration)
 	_show_tooltip()
 
 func _on_mouse_exited() -> void:
-	var tween := create_tween()
-	tween.tween_property(self, "modulate", Color.WHITE, tween_duration)
 	_hide_tooltip()
-
-func _on_button_down() -> void:
-	var tween := create_tween()
-	tween.tween_property(self, "self_modulate:a", click_opacity, tween_duration)
-
-func _on_button_up() -> void:
-	var tween := create_tween()
-	tween.tween_property(self, "self_modulate:a", 1.0, tween_duration)
 
 func _show_tooltip() -> void:
 	if hint_text == "":
@@ -62,11 +49,7 @@ func _show_tooltip() -> void:
 	var label := Label.new()
 	label.text = hint_text
 	label.add_theme_color_override("font_color", Color.WHITE)
-
-	# Longer hint text (3-4 sentences) needs to wrap into multiple lines
-	# within a fixed width, rather than rendering as one giant unwrapped
-	# line that runs off both edges of the screen.
-	label.custom_minimum_size = Vector2(320, 0)
+	label.custom_minimum_size = Vector2(280, 0)
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.add_theme_font_size_override("font_size", tooltip_font_size)
@@ -87,7 +70,7 @@ func _position_tooltip() -> void:
 	var x: float = global_position.x + (size.x / 2.0) - (tooltip_size.x / 2.0)
 	x = clamp(x, 0.0, viewport_width - tooltip_size.x)
 
-	var y: float = global_position.y - tooltip_size.y - tooltip_gap_above
+	var y: float = global_position.y + size.y + tooltip_gap_below
 	_tooltip.global_position = Vector2(x, y)
 
 func _hide_tooltip() -> void:
