@@ -1,6 +1,23 @@
 [gd_scene format=3 uid="uid://bbennb3ulr2e"]
 
 [ext_resource type="Script" uid="uid://b6bdhgvajwgmv" path="res://scenes/main/network_overview.gd" id="2_iuonh"]
+[ext_resource type="Texture2D" uid="uid://23dod01a5ynf" path="res://art/ui/icon_network_cash.png" id="2_k2fmo"]
+[ext_resource type="Script" uid="uid://b7reyr4epsrek" path="res://scenes/station/stat_icon_hover.gd" id="3_l3cfh"]
+[ext_resource type="Texture2D" uid="uid://c7xs4adrb1jva" path="res://art/ui/icon_reputation.png" id="4_ow5a4"]
+[ext_resource type="Texture2D" uid="uid://fujxdkyy1o3x" path="res://art/ui/icon_total_listeners.png" id="5_hujxm"]
+[ext_resource type="Texture2D" uid="uid://dfjjfx71a4xnx" path="res://art/ui/icon_week.png" id="6_yyfjg"]
+[ext_resource type="Texture2D" uid="uid://ckcmyt37argh6" path="res://art/ui/icon_menu.png" id="7_hujxm"]
+[ext_resource type="Script" uid="uid://bfcjfpyrsn7kr" path="res://scenes/station/button_icon_hover.gd" id="8_yyfjg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hujxm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yyfjg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b1x3f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a8run"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ouso4"]
 
 [node name="Main" type="Node2D" unique_id=122583600]
 
@@ -27,12 +44,10 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="NetworkOverview" unique_id=96521990]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="NetworkHeader" type="Label" parent="NetworkOverview/VBoxContainer" unique_id=501470802]
-unique_name_in_owner = true
-layout_mode = 2
+offset_left = 15.0
+offset_top = 174.0
+offset_right = 443.0
+offset_bottom = 244.0
 
 [node name="StationList" type="VBoxContainer" parent="NetworkOverview/VBoxContainer" unique_id=516673867]
 unique_name_in_owner = true
@@ -42,30 +57,6 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 text = "End Week All Stations"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="NetworkOverview/VBoxContainer" unique_id=1100290405]
-layout_mode = 2
-
-[node name="CashLabel" type="Label" parent="NetworkOverview/VBoxContainer/HBoxContainer" unique_id=737982915]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="ReputationLabel" type="Label" parent="NetworkOverview/VBoxContainer/HBoxContainer" unique_id=1153183847]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="ListenersLabel" type="Label" parent="NetworkOverview/VBoxContainer/HBoxContainer" unique_id=267043759]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="WeekLabel" type="Label" parent="NetworkOverview/VBoxContainer/HBoxContainer" unique_id=1957325027]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="MenuButton" type="Button" parent="NetworkOverview/VBoxContainer/HBoxContainer" unique_id=1137860947]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Menu"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="NetworkOverview/VBoxContainer" unique_id=666701502]
 layout_mode = 2
@@ -89,3 +80,107 @@ text = "Network Analytics"
 unique_name_in_owner = true
 layout_mode = 2
 text = "HQ"
+
+[node name="TopBar" type="HBoxContainer" parent="NetworkOverview" unique_id=778128259]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 80.0
+offset_right = 440.0
+offset_bottom = 169.0
+
+[node name="NetworkHeader" type="Label" parent="NetworkOverview/TopBar" unique_id=1991326413]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="IconNetworkCash" type="TextureRect" parent="NetworkOverview/TopBar" unique_id=1036707858]
+layout_mode = 2
+texture = ExtResource("2_k2fmo")
+expand_mode = 3
+script = ExtResource("3_l3cfh")
+
+[node name="CashLabel" type="Label" parent="NetworkOverview/TopBar/IconNetworkCash" unique_id=709643172]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 6.0
+offset_top = 57.0
+offset_right = 76.0
+offset_bottom = 83.0
+theme_override_colors/font_color = Color(0.1882353, 0.16470589, 0.12941177, 1)
+theme_override_font_sizes/font_size = 18
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IconReputation" type="TextureRect" parent="NetworkOverview/TopBar" unique_id=1474285912]
+layout_mode = 2
+texture = ExtResource("4_ow5a4")
+expand_mode = 3
+script = ExtResource("3_l3cfh")
+
+[node name="ReputationLabel" type="Label" parent="NetworkOverview/TopBar/IconReputation" unique_id=450125805]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 6.0
+offset_top = 57.0
+offset_right = 76.0
+offset_bottom = 83.0
+theme_override_colors/font_color = Color(0.1882353, 0.16470589, 0.12941177, 1)
+theme_override_font_sizes/font_size = 18
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IconTotalListeners" type="TextureRect" parent="NetworkOverview/TopBar" unique_id=206951568]
+layout_mode = 2
+texture = ExtResource("5_hujxm")
+expand_mode = 3
+script = ExtResource("3_l3cfh")
+
+[node name="ListenersLabel" type="Label" parent="NetworkOverview/TopBar/IconTotalListeners" unique_id=645243181]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 6.0
+offset_top = 57.0
+offset_right = 76.0
+offset_bottom = 83.0
+theme_override_colors/font_color = Color(0.1882353, 0.16470589, 0.12941177, 1)
+theme_override_font_sizes/font_size = 18
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IconWeek" type="TextureRect" parent="NetworkOverview/TopBar" unique_id=117926250]
+layout_mode = 2
+texture = ExtResource("6_yyfjg")
+expand_mode = 3
+script = ExtResource("3_l3cfh")
+
+[node name="WeekLabel" type="Label" parent="NetworkOverview/TopBar/IconWeek" unique_id=850398453]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 6.0
+offset_top = 57.0
+offset_right = 76.0
+offset_bottom = 83.0
+theme_override_colors/font_color = Color(0.1882353, 0.16470589, 0.12941177, 1)
+theme_override_font_sizes/font_size = 18
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuButton" type="Button" parent="NetworkOverview/TopBar" unique_id=886232910]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hujxm")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_yyfjg")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_b1x3f")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_a8run")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ouso4")
+icon = ExtResource("7_hujxm")
+script = ExtResource("8_yyfjg")
+hint_text = "Access Save, Load, and Settings or quit the game."
+
+[node name="BottomBar" type="HBoxContainer" parent="NetworkOverview" unique_id=90734384]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

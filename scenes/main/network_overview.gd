@@ -137,10 +137,12 @@ func _close_overlay() -> void:
 	_refresh_display()
 
 func _refresh_display() -> void:
-	%CashLabel.text = "Cash: $" + str(GameState.cash)
-	%ReputationLabel.text = "Reputation: %d" % int(GameState.network_reputation)
-	%ListenersLabel.text = "Listeners: " + str(GameState.total_network_listeners())
-	%WeekLabel.text = "Week: " + str(GameState.current_week)
+	# Bare numbers now, matching the icon-based convention from Station
+	# View - the icon itself communicates what each number represents.
+	%CashLabel.text = _format_cash(GameState.cash)
+	%ReputationLabel.text = str(int(GameState.network_reputation))
+	%ListenersLabel.text = str(GameState.total_network_listeners())
+	%WeekLabel.text = str(GameState.current_week)
 	%NetworkHeader.text = GameState.network_name
 
 	for child in %StationList.get_children():
@@ -156,3 +158,11 @@ func _refresh_display() -> void:
 		]
 		button.pressed.connect(_on_station_button_pressed.bind(station))
 		%StationList.add_child(button)
+
+## Abbreviates large cash values as "K" (e.g. 254000 -> "$254K") for
+## readability once the number climbs past 6 figures - shows the full
+## number below that threshold.
+func _format_cash(amount: int) -> String:
+	if amount >= 9999:
+		return "$%dK" % int(round(amount / 1000.0))
+	return "$" + str(amount)
